@@ -62,5 +62,5 @@ struct WeatherViewController: View {
 }
 
 #Preview {
-    WeatherViewTest()
+    WeatherViewController()
 }
