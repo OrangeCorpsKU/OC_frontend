@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "9F2A5A73-0770-4D9C-92D4-AED5311F202A"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84CEBAA8-5CF7-4AA1-A053-8B8EB15863CF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "K-lab-project/MypageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "10"
+            endingLineNumber = "10"
+            landmarkName = "MypageViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "84CEBAA8-5CF7-4AA1-A053-8B8EB15863CF - 8bfddfa42a3a12ae"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "K_lab_project.MypageViewController.__allocating_init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; K_lab_project.MypageViewController"
+                  moduleName = "K-lab-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/soeun/Desktop/K-Lab-Project2-FE/K-lab-project/K-lab-project/MypageViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "84CEBAA8-5CF7-4AA1-A053-8B8EB15863CF - 12f7497d27c91b4f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "K_lab_project.MypageViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; K_lab_project.MypageViewController"
+                  moduleName = "K-lab-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/soeun/Desktop/K-Lab-Project2-FE/K-lab-project/K-lab-project/MypageViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "10"
+                  endingLineNumber = "10"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "84CEBAA8-5CF7-4AA1-A053-8B8EB15863CF - cafe682443d86b59"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "K_lab_project.MypageViewController.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;K_lab_project.MypageViewController&gt;"
+                  moduleName = "K-lab-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/soeun/Desktop/K-Lab-Project2-FE/K-lab-project/K-lab-project/MypageViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "84CEBAA8-5CF7-4AA1-A053-8B8EB15863CF - ab49fbfd7f94ed02"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "K_lab_project.MypageViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;K_lab_project.MypageViewController&gt;"
+                  moduleName = "K-lab-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/soeun/Desktop/K-Lab-Project2-FE/K-lab-project/K-lab-project/MypageViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "10"
+                  endingLineNumber = "10"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "84CEBAA8-5CF7-4AA1-A053-8B8EB15863CF - 97fdf35f36f5d0c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "K_lab_project.MypageViewController.__deallocating_deinit"
+                  moduleName = "K-lab-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/soeun/Desktop/K-Lab-Project2-FE/K-lab-project/K-lab-project/MypageViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "49B2843D-7D83-41DC-952A-D945E138C53B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "K-lab-project/CreateAccountViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "CreateAccountViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "49B2843D-7D83-41DC-952A-D945E138C53B - 743f12eb660f464f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; __C.UITextField in variable initialization expression of K_lab_project.CreateAccountViewController.textField : __C.UITextField"
+                  moduleName = "K-lab-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/soeun/Desktop/K-Lab-Project2-FE/K-lab-project/K-lab-project/CreateAccountViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "49B2843D-7D83-41DC-952A-D945E138C53B - 2ad337901af37fb1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "K_lab_project.CreateAccountViewController.textField.getter : __C.UITextField"
+                  moduleName = "K-lab-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/soeun/Desktop/K-Lab-Project2-FE/K-lab-project/K-lab-project/CreateAccountViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "49B2843D-7D83-41DC-952A-D945E138C53B - 1f80b6e0af13fd54"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "K_lab_project.CreateAccountViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; K_lab_project.CreateAccountViewController"
+                  moduleName = "K-lab-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/soeun/Desktop/K-Lab-Project2-FE/K-lab-project/K-lab-project/CreateAccountViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "184">
+               </Location>
+               <Location
+                  uuid = "49B2843D-7D83-41DC-952A-D945E138C53B - cc733b0891dbb991"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "K_lab_project.CreateAccountViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;K_lab_project.CreateAccountViewController&gt;"
+                  moduleName = "K-lab-project"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/soeun/Desktop/K-Lab-Project2-FE/K-lab-project/K-lab-project/CreateAccountViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "164">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9F115EEE-9A6A-4B7D-82DE-21A945CEB7A3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "K-lab-project/Controllers/MypageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "MypageViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
