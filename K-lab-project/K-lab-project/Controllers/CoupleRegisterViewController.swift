@@ -30,7 +30,7 @@ class CoupleRegisterViewController: UIViewController,UITableViewDataSource{
     
     
     @IBAction func SearchButtonPressed(_ sender: UIButton) {
-        let vcName = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController")
+        let vcName = self.storyboard?.instantiateViewController(withIdentifier: "UITabBarController")
                 vcName?.modalPresentationStyle = .fullScreen //전체화면으로 보이게 설정
                 vcName?.modalTransitionStyle = .crossDissolve //전환 애니메이션 설정
                 self.present(vcName!, animated: true, completion: nil)
