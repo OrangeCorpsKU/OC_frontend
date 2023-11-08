@@ -21,12 +21,14 @@ class MainViewController: UIViewController,UITableViewDataSource, UITableViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         mainNews_tableView.dataSource = self
         mainNews_tableView.delegate = self
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
+        
         mainNews_tableView.addGestureRecognizer(tapGesture)
+        
+        
     }
     
     
@@ -46,19 +48,19 @@ class MainViewController: UIViewController,UITableViewDataSource, UITableViewDel
         return cell
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+    @objc func didTapView(_ sender: UITapGestureRecognizer) {
+        print("print!")
+        
         // 테이블 뷰가 탭되었을 때 실행되는 코드
-        if sender.state == .ended {
-            // 스토리보드에서 다른 뷰 컨트롤러로 이동
-            if let NewsViewController = storyboard?.instantiateViewController(withIdentifier: "NewsViewController") as? NewsViewController {
-                navigationController?.pushViewController(NewsViewController, animated: true)
-            }
-        }
+        let vcName = self.storyboard?.instantiateViewController(withIdentifier: "NewsViewController")
+        vcName?.modalPresentationStyle = .fullScreen //전체화면으로 보이게 설정
+        vcName?.modalTransitionStyle = .crossDissolve //전환 애니메이션 설정
+        self.present(vcName!, animated: true, completion: nil)
+        
+        
+        
+
     }
     
-    
-    
-    
-
    
 }
