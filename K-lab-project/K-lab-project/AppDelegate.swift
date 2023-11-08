@@ -30,8 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(
-        _app: UIApplication,
-        open url: URL, option: [UIApplication.OpenURLOptionsKey : Any] = [:]
+        _ _app: UIApplication,
+        open url: URL, options option: [UIApplication.OpenURLOptionsKey : Any] = [:]
     ) -> Bool {
         var handled: Bool
         

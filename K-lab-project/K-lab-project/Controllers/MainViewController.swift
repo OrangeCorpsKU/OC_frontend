@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController,UITableViewDataSource {
+class MainViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
 
     var newsArray: [News] = [
         News(newsImage:UIImage(systemName: "newspaper"),newsHeadLine: "0000000", newsMainText: "0000000000"),
@@ -15,12 +15,18 @@ class MainViewController: UIViewController,UITableViewDataSource {
     ]
 
     
+    
+    
     @IBOutlet weak var mainNews_tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         mainNews_tableView.dataSource = self
+        mainNews_tableView.delegate = self
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        mainNews_tableView.addGestureRecognizer(tapGesture)
     }
     
     
@@ -35,7 +41,19 @@ class MainViewController: UIViewController,UITableViewDataSource {
         cell.mainNewsHeadLine.text = newsArray[indexPath.row].newsHeadLine
         cell.mainNewsMainText.text = newsArray[indexPath.row].newsMainText
         
+        
+        
         return cell
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        // 테이블 뷰가 탭되었을 때 실행되는 코드
+        if sender.state == .ended {
+            // 스토리보드에서 다른 뷰 컨트롤러로 이동
+            if let NewsViewController = storyboard?.instantiateViewController(withIdentifier: "NewsViewController") as? NewsViewController {
+                navigationController?.pushViewController(NewsViewController, animated: true)
+            }
+        }
     }
     
     
