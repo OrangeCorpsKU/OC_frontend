@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class MainViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
 
@@ -17,6 +18,7 @@ class MainViewController: UIViewController,UITableViewDataSource, UITableViewDel
     
     
     
+    @IBOutlet weak var mainWeather_tableView: UITableView!
     @IBOutlet weak var mainNews_tableView: UITableView!
     
     override func viewDidLoad() {
@@ -24,10 +26,12 @@ class MainViewController: UIViewController,UITableViewDataSource, UITableViewDel
         mainNews_tableView.dataSource = self
         mainNews_tableView.delegate = self
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
+        let tapNewsGesture = UITapGestureRecognizer(target: self, action: #selector(didNewsTapView(_:)))
         
-        mainNews_tableView.addGestureRecognizer(tapGesture)
-        
+        let tapWeatherGesture = UITapGestureRecognizer(target: self, action: #selector(didWeatherTapView(_:)))
+
+        mainNews_tableView.addGestureRecognizer(tapNewsGesture)
+        mainWeather_tableView.addGestureRecognizer(tapWeatherGesture)
         
     }
     
@@ -48,19 +52,20 @@ class MainViewController: UIViewController,UITableViewDataSource, UITableViewDel
         return cell
     }
     
-    @objc func didTapView(_ sender: UITapGestureRecognizer) {
-        print("print!")
+    @objc func didNewsTapView(_ sender: UITapGestureRecognizer) {
         
         // 테이블 뷰가 탭되었을 때 실행되는 코드
         let vcName = self.storyboard?.instantiateViewController(withIdentifier: "NewsViewController")
         vcName?.modalPresentationStyle = .fullScreen //전체화면으로 보이게 설정
         vcName?.modalTransitionStyle = .crossDissolve //전환 애니메이션 설정
         self.present(vcName!, animated: true, completion: nil)
-        
-        
-        
-
     }
     
-   
+
+    @objc private func didWeatherTapView(_ sender: UITapGestureRecognizer) {
+        let hostingController = WeatherViewHostingController(rootView: WeatherViewController())
+        hostingController.modalPresentationStyle = .fullScreen
+        present(hostingController, animated: true)
+    }
+
 }

@@ -348,19 +348,13 @@
             </objects>
             <point key="canvasLocation" x="1446.5648854961833" y="-27.464788732394368"/>
         </scene>
-        <!--Chat-->
-        <scene sceneID="LcB-cu-HbY">
+        <!--Hosting Controller-->
+        <scene sceneID="YD9-km-u3s">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" id="e6H-y2-9m1" customClass="ChatViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yK2-lm-NFY">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Ozk-p7-YrX"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Chat" image="message" catalog="system" id="4C3-U4-l5G"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fZa-MV-t9u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <hostingController id="ViQ-H6-JkQ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Yp8-Zf-qWk"/>
+                </hostingController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cNN-Zb-9yD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3302" y="-837"/>
         </scene>
@@ -547,6 +541,7 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="PtR-pc-5bE"/>
                     <connections>
                         <outlet property="mainNews_tableView" destination="n98-xR-5Tz" id="4zq-ig-3ro"/>
+                        <outlet property="mainWeather_tableView" destination="mF5-ta-uHi" id="4Fa-Uz-G1D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BlF-WH-oty" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -639,22 +634,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5In-aI-z0V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4062" y="-144"/>
-        </scene>
-        <!--Weather View Controller-->
-        <scene sceneID="qEC-x3-UUo">
-            <objects>
-                <viewController title="Weather View Controller" id="Wub-FD-bP1" customClass="WeatherViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="u2A-Yg-Sf1">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="8qS-P4-nFn"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iHn-ba-gy1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4853" y="-144"/>
+            <point key="canvasLocation" x="4069" y="-137"/>
         </scene>
         <!--Mypage-->
         <scene sceneID="FjR-Vp-Dj2">
@@ -913,7 +893,7 @@
                     <connections>
                         <segue destination="ecT-d3-cxW" kind="relationship" relationship="viewControllers" id="pjg-FV-fvT"/>
                         <segue destination="ZNj-qw-7PP" kind="relationship" relationship="viewControllers" id="L6x-vS-HPC"/>
-                        <segue destination="e6H-y2-9m1" kind="relationship" relationship="viewControllers" id="dpg-Il-pTW"/>
+                        <segue destination="ViQ-H6-JkQ" kind="show" id="a7h-8o-Mke"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F0H-GD-bG6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -926,7 +906,6 @@
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="map" catalog="system" width="128" height="112"/>
-        <image name="message" catalog="system" width="128" height="116"/>
         <image name="orange-slice" width="256" height="256"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person" catalog="system" width="128" height="121"/>
