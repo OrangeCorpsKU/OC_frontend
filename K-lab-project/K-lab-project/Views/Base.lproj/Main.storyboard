@@ -348,16 +348,6 @@
             </objects>
             <point key="canvasLocation" x="1446.5648854961833" y="-27.464788732394368"/>
         </scene>
-        <!--Hosting Controller-->
-        <scene sceneID="YD9-km-u3s">
-            <objects>
-                <hostingController id="ViQ-H6-JkQ" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Yp8-Zf-qWk"/>
-                </hostingController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cNN-Zb-9yD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3302" y="-837"/>
-        </scene>
         <!--Home-->
         <scene sceneID="bPR-f3-EmL">
             <objects>
@@ -893,7 +883,6 @@
                     <connections>
                         <segue destination="ecT-d3-cxW" kind="relationship" relationship="viewControllers" id="pjg-FV-fvT"/>
                         <segue destination="ZNj-qw-7PP" kind="relationship" relationship="viewControllers" id="L6x-vS-HPC"/>
-                        <segue destination="ViQ-H6-JkQ" kind="show" id="a7h-8o-Mke"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F0H-GD-bG6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -915,7 +904,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
