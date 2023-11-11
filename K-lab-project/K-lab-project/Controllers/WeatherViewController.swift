@@ -17,7 +17,14 @@ struct DiagonalLine: Shape {
     }
 }
 
+//Delegate Protocol을 생성
+protocol WeatherViewDelegate: AnyObject {
+    func didTapBackButton()
+}
+
 struct WeatherViewController: View {
+    
+    weak var delegate: WeatherViewDelegate? //Delegate 선언
     
     //버튼을 눌렀을 때 액션들을 수행하기 위한 State 값들입니다.
     @State private var firstButtonColor: Color = Color.yellow
@@ -40,8 +47,10 @@ struct WeatherViewController: View {
     var body: some View {
         VStack{
             HStack(spacing: 0) {
+                
+                //뒤로 가기 버튼
                 Button(action: {
-                    // Add action here
+                    delegate?.didTapBackButton() //뒤로 가기를 수행한다
                 }) {
                     Image(systemName: "chevron.left")
                         .foregroundColor(.black)

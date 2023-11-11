@@ -351,7 +351,7 @@
         <!--Chat-->
         <scene sceneID="LcB-cu-HbY">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" id="e6H-y2-9m1" customClass="ChatViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="e6H-y2-9m1" customClass="ChatUIController" customModule="K_lab_project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yK2-lm-NFY">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -634,20 +634,20 @@
             </objects>
             <point key="canvasLocation" x="4062" y="-144"/>
         </scene>
-        <!--Weather View Controller-->
-        <scene sceneID="qEC-x3-UUo">
+        <!--WeatherView_Controller-->
+        <scene sceneID="dG5-WO-enl">
             <objects>
-                <viewController title="Weather View Controller" id="Wub-FD-bP1" customClass="WeatherViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="u2A-Yg-Sf1">
+                <viewController storyboardIdentifier="HostingControllerIdentifier" title="WeatherView_Controller" id="x5e-Md-eQC" customClass="HostingController" customModule="K_lab_project" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OjK-TT-caW" customClass="HostingController" customModule="K_lab_project" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="8qS-P4-nFn"/>
+                        <viewLayoutGuide key="safeArea" id="pUY-DQ-vZJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iHn-ba-gy1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UPP-qR-H5u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4853" y="-144"/>
+            <point key="canvasLocation" x="4816" y="-144"/>
         </scene>
         <!--Mypage-->
         <scene sceneID="FjR-Vp-Dj2">

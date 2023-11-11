@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController,UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var newsArray: [News] = [
         News(newsImage:UIImage(systemName: "newspaper"),newsHeadLine: "0000000", newsMainText: "0000000000"),
@@ -21,6 +21,7 @@ class MainViewController: UIViewController,UITableViewDataSource {
         super.viewDidLoad()
 
         mainNews_tableView.dataSource = self
+        mainNews_tableView.delegate = self //delegate를 설정해야 한답니다!
     }
     
     
@@ -35,12 +36,16 @@ class MainViewController: UIViewController,UITableViewDataSource {
         cell.mainNewsHeadLine.text = newsArray[indexPath.row].newsHeadLine
         cell.mainNewsMainText.text = newsArray[indexPath.row].newsMainText
         
+//        cell.delegate = self // Set the delegate to self
+        
         return cell
     }
     
-    
-    
-    
-
-   
+    // Implement the MainNewsTableViewCellDelegate method
+//        func didTapCell() {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil) // Replace "Main" with your actual storyboard name
+//            if let hostingController = storyboard.instantiateViewController(withIdentifier: "HostingControllerIdentifier") as? HostingController {
+//                self.navigationController?.pushViewController(hostingController, animated: true)
+//            }
+//        }
 }
