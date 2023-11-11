@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D5651AF2AFD34C6008D072C /* HostingController_forChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5651AE2AFD34C6008D072C /* HostingController_forChatView.swift */; };
+		0D5651B12AFD37D0008D072C /* ChatUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5651B02AFD37D0008D072C /* ChatUIController.swift */; };
 		19026ED62AF0DEB400951591 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026ED52AF0DEB400951591 /* NewsViewController.swift */; };
 		19026ED82AF13FF200951591 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026ED72AF13FF200951591 /* News.swift */; };
 		19026EDA2AF1415F00951591 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026ED92AF1415F00951591 /* NewsTableViewCell.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D5651AE2AFD34C6008D072C /* HostingController_forChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController_forChatView.swift; sourceTree = "<group>"; };
+		0D5651B02AFD37D0008D072C /* ChatUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUIController.swift; sourceTree = "<group>"; };
 		19026ED52AF0DEB400951591 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		19026ED72AF13FF200951591 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		19026ED92AF1415F00951591 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
@@ -137,6 +141,8 @@
 				19026ED52AF0DEB400951591 /* NewsViewController.swift */,
 				19026EDF2AF2347F00951591 /* WeatherViewHostingController.swift */,
 				19026EE12AF234EA00951591 /* ChatViewController.swift */,
+				0D5651AE2AFD34C6008D072C /* HostingController_forChatView.swift */,
+				0D5651B02AFD37D0008D072C /* ChatUIController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -280,6 +286,7 @@
 				19B0300C2AEEA9DA00B14EC5 /* CreateAccountViewController.swift in Sources */,
 				19026ED62AF0DEB400951591 /* NewsViewController.swift in Sources */,
 				19C8A4182AEFEB7700F8AEB4 /* UserTableViewCell.swift in Sources */,
+				0D5651AF2AFD34C6008D072C /* HostingController_forChatView.swift in Sources */,
 				19026EDC2AF14A7F00951591 /* MainNewsTableViewCell.swift in Sources */,
 				19B0300E2AEEAE9C00B14EC5 /* CoupleRegisterViewController.swift in Sources */,
 				19B02FED2AED386F00B14EC5 /* ViewController.swift in Sources */,
@@ -287,6 +294,7 @@
 				19026EE22AF234EA00951591 /* ChatViewController.swift in Sources */,
 				19B02FF32AED386F00B14EC5 /* K_lab_project.xcdatamodeld in Sources */,
 				19B02FE92AED386F00B14EC5 /* AppDelegate.swift in Sources */,
+				0D5651B12AFD37D0008D072C /* ChatUIController.swift in Sources */,
 				19B02FEB2AED386F00B14EC5 /* SceneDelegate.swift in Sources */,
 				19026ED82AF13FF200951591 /* News.swift in Sources */,
 				19C8A41E2AEFEDDC00F8AEB4 /* User.swift in Sources */,

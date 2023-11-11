@@ -20,7 +20,6 @@ class NewsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         
-        
     }
     
     
