@@ -15,6 +15,7 @@ class CreateAccountViewController: UIViewController,UIPickerViewDelegate,UIPicke
     @IBOutlet weak var DateTextField: UITextField!
     @IBOutlet weak var UserImageView: UIImageView!
     
+    var User: User?
     
     let datePicker = UIDatePicker()
     let countryPicker = UIPickerView()

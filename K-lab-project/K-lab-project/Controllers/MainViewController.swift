@@ -14,7 +14,14 @@ class MainViewController: UIViewController,UITableViewDataSource {
         News(newsImage:UIImage(systemName: "newspaper"),newsHeadLine: "0000000", newsMainText: "0000000000")
     ]
 
+<<<<<<< Updated upstream
     
+=======
+    var User: User?
+    
+    
+    @IBOutlet weak var mainWeather_tableView: UITableView!
+>>>>>>> Stashed changes
     @IBOutlet weak var mainNews_tableView: UITableView!
     
     override func viewDidLoad() {
