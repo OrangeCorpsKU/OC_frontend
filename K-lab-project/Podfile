@@ -6,6 +6,7 @@ target 'K-lab-project' do
   use_frameworks!
 
   # Pods for K-lab-project
-  pod 'GoogleSignIn'
-  pod 'GoogleSignInSwiftSupport'
+pod 'GoogleSignIn'
+pod 'GoogleSignInSwiftSupport'
+
 end

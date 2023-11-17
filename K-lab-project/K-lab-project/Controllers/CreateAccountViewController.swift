@@ -15,7 +15,6 @@ class CreateAccountViewController: UIViewController,UIPickerViewDelegate,UIPicke
     @IBOutlet weak var DateTextField: UITextField!
     @IBOutlet weak var UserImageView: UIImageView!
     
-    var User: User?
     
     let datePicker = UIDatePicker()
     let countryPicker = UIPickerView()
@@ -41,7 +40,6 @@ class CreateAccountViewController: UIViewController,UIPickerViewDelegate,UIPicke
         UserIDTextField.placeholder = "USERNAME"
         CountryTextField.placeholder = "COUNTRY"
         DateTextField.placeholder = "Date of Birth"
-        
         
         UserImageView.layer.cornerRadius =  UserImageView.frame.width / 2
                 //테두리 굵기

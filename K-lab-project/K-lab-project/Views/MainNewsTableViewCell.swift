@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol MainNewsTableViewCellDelegate: AnyObject {
+    func didTapCell()
+}
+
 class MainNewsTableViewCell: UITableViewCell {
     
+    //delegate 선언
+    weak var delegate: MainNewsTableViewCellDelegate?
     
     @IBOutlet weak var mainNewsImageView: UIImageView!
     @IBOutlet weak var mainNewsHeadLine: UILabel!
@@ -24,5 +30,10 @@ class MainNewsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    //Add an action for when the cell is tapped
+    @IBAction func cellTapped(_ sender: Any) {
+            delegate?.didTapCell()
+        }
 
 }

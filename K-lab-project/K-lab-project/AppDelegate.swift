@@ -15,41 +15,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        GoogleSignIn.GIDSignIn.sharedInstance.restorePreviousSignIn{ user, error in
+            if error != nil || user == nil{
+                //show the app's signed-out state
+            }else{
+                //show the app's signed-in state
+            }
+        }
         
         // splash
         Thread.sleep(forTimeInterval: 1.0)
         return true
     }
     
-<<<<<<< Updated upstream
     
     func application(
-        _app: UIApplication,
-        open url: URL, option: [UIApplication.OpenURLOptionsKey : Any] = [:]
+        _ _app: UIApplication,
+        open url: URL, options option: [UIApplication.OpenURLOptionsKey : Any] = [:]
     ) -> Bool {
         var handled: Bool
         
         handled = GIDSignIn.sharedInstance.handle(url)
         if handled {
             return true
-=======
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance.handle(url)
->>>>>>> Stashed changes
         }
-
-    
+        return false
+    }
 
     // MARK: UISceneSession Lifecycle
 
-    @available(iOS 13.0, *)
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
 
         
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
-    @available(iOS 13.0, *)
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.

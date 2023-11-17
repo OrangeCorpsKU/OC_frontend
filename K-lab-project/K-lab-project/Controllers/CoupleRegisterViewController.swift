@@ -20,7 +20,6 @@ class CoupleRegisterViewController: UIViewController,UITableViewDataSource{
     override func viewDidLoad() {
         super.viewDidLoad()
         user_tableView.dataSource = self
-
     }
     
 

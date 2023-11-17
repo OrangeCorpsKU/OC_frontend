@@ -7,9 +7,9 @@
 
 import UIKit
 import GoogleSignIn
+import SwiftUI
 
-class  ViewController: UIViewController{
-    
+class ViewController: UIViewController {
 
     @IBOutlet weak var SignUpBtn: UIButton!
     
@@ -21,9 +21,8 @@ class  ViewController: UIViewController{
         checkState()
     }
     
-    
     func setup(){
-        
+
         SignUpBtn.layer.borderWidth = 1
         SignUpBtn.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         SignUpBtn.layer.cornerRadius = 12
@@ -32,6 +31,7 @@ class  ViewController: UIViewController{
     
     }
     
+
 extension ViewController{
     
     func checkState() {
