@@ -7,14 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D3824322B0A2E1300989B60 /* NewsWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3824312B0A2E1300989B60 /* NewsWeatherView.swift */; };
+		0D3824342B0A391500989B60 /* HostingController_forNewsWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3824332B0A391500989B60 /* HostingController_forNewsWeather.swift */; };
 		0D5651AF2AFD34C6008D072C /* HostingController_forChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5651AE2AFD34C6008D072C /* HostingController_forChatView.swift */; };
 		0D5651B12AFD37D0008D072C /* ChatUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5651B02AFD37D0008D072C /* ChatUIController.swift */; };
-		19026ED62AF0DEB400951591 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026ED52AF0DEB400951591 /* NewsViewController.swift */; };
+		0D6BB7332B049E6300C1896A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6BB7322B049E6300C1896A /* TabBarViewController.swift */; };
 		19026ED82AF13FF200951591 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026ED72AF13FF200951591 /* News.swift */; };
-		19026EDA2AF1415F00951591 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026ED92AF1415F00951591 /* NewsTableViewCell.swift */; };
-		19026EDC2AF14A7F00951591 /* MainNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026EDB2AF14A7E00951591 /* MainNewsTableViewCell.swift */; };
-		19026EDE2AF1536A00951591 /* MainWeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026EDD2AF1536A00951591 /* MainWeatherTableViewCell.swift */; };
-		19026EE02AF2347F00951591 /* WeatherViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026EDF2AF2347F00951591 /* WeatherViewHostingController.swift */; };
 		19026EE22AF234EA00951591 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026EE12AF234EA00951591 /* ChatViewController.swift */; };
 		19B02FE92AED386F00B14EC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B02FE82AED386F00B14EC5 /* AppDelegate.swift */; };
 		19B02FEB2AED386F00B14EC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B02FEA2AED386F00B14EC5 /* SceneDelegate.swift */; };
@@ -33,14 +31,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D3824312B0A2E1300989B60 /* NewsWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsWeatherView.swift; sourceTree = "<group>"; };
+		0D3824332B0A391500989B60 /* HostingController_forNewsWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController_forNewsWeather.swift; sourceTree = "<group>"; };
 		0D5651AE2AFD34C6008D072C /* HostingController_forChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController_forChatView.swift; sourceTree = "<group>"; };
 		0D5651B02AFD37D0008D072C /* ChatUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUIController.swift; sourceTree = "<group>"; };
-		19026ED52AF0DEB400951591 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		0D6BB7322B049E6300C1896A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		19026ED72AF13FF200951591 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
-		19026ED92AF1415F00951591 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
-		19026EDB2AF14A7E00951591 /* MainNewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNewsTableViewCell.swift; sourceTree = "<group>"; };
-		19026EDD2AF1536A00951591 /* MainWeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherTableViewCell.swift; sourceTree = "<group>"; };
-		19026EDF2AF2347F00951591 /* WeatherViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewHostingController.swift; sourceTree = "<group>"; };
 		19026EE12AF234EA00951591 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		19B02FE52AED386F00B14EC5 /* K-lab-project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "K-lab-project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B02FE82AED386F00B14EC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -123,9 +119,6 @@
 			children = (
 				19C8A4172AEFEB7700F8AEB4 /* UserTableViewCell.swift */,
 				19B02FEE2AED386F00B14EC5 /* Main.storyboard */,
-				19026ED92AF1415F00951591 /* NewsTableViewCell.swift */,
-				19026EDB2AF14A7E00951591 /* MainNewsTableViewCell.swift */,
-				19026EDD2AF1536A00951591 /* MainWeatherTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -138,11 +131,12 @@
 				19B0300D2AEEAE9C00B14EC5 /* CoupleRegisterViewController.swift */,
 				19B0300B2AEEA9DA00B14EC5 /* CreateAccountViewController.swift */,
 				19B02FEC2AED386F00B14EC5 /* ViewController.swift */,
-				19026ED52AF0DEB400951591 /* NewsViewController.swift */,
-				19026EDF2AF2347F00951591 /* WeatherViewHostingController.swift */,
 				19026EE12AF234EA00951591 /* ChatViewController.swift */,
 				0D5651AE2AFD34C6008D072C /* HostingController_forChatView.swift */,
 				0D5651B02AFD37D0008D072C /* ChatUIController.swift */,
+				0D6BB7322B049E6300C1896A /* TabBarViewController.swift */,
+				0D3824312B0A2E1300989B60 /* NewsWeatherView.swift */,
+				0D3824332B0A391500989B60 /* HostingController_forNewsWeather.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -280,23 +274,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				19D714282AEEC8530061552F /* MypageViewController.swift in Sources */,
-				19026EE02AF2347F00951591 /* WeatherViewHostingController.swift in Sources */,
-				19026EDE2AF1536A00951591 /* MainWeatherTableViewCell.swift in Sources */,
 				19B030102AEEB14D00B14EC5 /* MainViewController.swift in Sources */,
 				19B0300C2AEEA9DA00B14EC5 /* CreateAccountViewController.swift in Sources */,
-				19026ED62AF0DEB400951591 /* NewsViewController.swift in Sources */,
 				19C8A4182AEFEB7700F8AEB4 /* UserTableViewCell.swift in Sources */,
+				0D3824322B0A2E1300989B60 /* NewsWeatherView.swift in Sources */,
 				0D5651AF2AFD34C6008D072C /* HostingController_forChatView.swift in Sources */,
-				19026EDC2AF14A7F00951591 /* MainNewsTableViewCell.swift in Sources */,
 				19B0300E2AEEAE9C00B14EC5 /* CoupleRegisterViewController.swift in Sources */,
 				19B02FED2AED386F00B14EC5 /* ViewController.swift in Sources */,
-				19026EDA2AF1415F00951591 /* NewsTableViewCell.swift in Sources */,
+				0D6BB7332B049E6300C1896A /* TabBarViewController.swift in Sources */,
 				19026EE22AF234EA00951591 /* ChatViewController.swift in Sources */,
 				19B02FF32AED386F00B14EC5 /* K_lab_project.xcdatamodeld in Sources */,
 				19B02FE92AED386F00B14EC5 /* AppDelegate.swift in Sources */,
 				0D5651B12AFD37D0008D072C /* ChatUIController.swift in Sources */,
 				19B02FEB2AED386F00B14EC5 /* SceneDelegate.swift in Sources */,
 				19026ED82AF13FF200951591 /* News.swift in Sources */,
+				0D3824342B0A391500989B60 /* HostingController_forNewsWeather.swift in Sources */,
 				19C8A41E2AEFEDDC00F8AEB4 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

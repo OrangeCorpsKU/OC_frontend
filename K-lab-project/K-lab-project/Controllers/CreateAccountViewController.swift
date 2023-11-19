@@ -41,7 +41,6 @@ class CreateAccountViewController: UIViewController,UIPickerViewDelegate,UIPicke
         CountryTextField.placeholder = "COUNTRY"
         DateTextField.placeholder = "Date of Birth"
         
-        
         UserImageView.layer.cornerRadius =  UserImageView.frame.width / 2
                 //테두리 굵기
         UserImageView.layer.borderWidth = 2

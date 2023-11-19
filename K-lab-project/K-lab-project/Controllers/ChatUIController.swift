@@ -22,5 +22,4 @@ class ChatUIController: UIViewController {
         view.addSubview(tabBarController.view)
         tabBarController.didMove(toParent: self)
     }
-    
 }

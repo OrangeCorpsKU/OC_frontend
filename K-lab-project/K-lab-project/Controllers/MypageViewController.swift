@@ -177,6 +177,7 @@ class MypageViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
             
             return formatter.string(from: date)
         }
+    
         //DONE toolbar
         private func setupDayPickerToolBar() {
             
