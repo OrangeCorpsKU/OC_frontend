@@ -19,24 +19,44 @@ class MainViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var myTime: UILabel!
     
     
-    //
+    @IBOutlet weak var mainTIDLabel: UILabel!
+    
+    
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var answerTextView: UITextView!
     @IBOutlet weak var saveButton: UIButton!
-
+    
+    
+    @IBOutlet weak var loverAnswerLabel: UILabel!
+    
     
     @IBOutlet weak var tidView: UIView!
+    //상태 : Models에 있음
     var questionState: QuestionState = .myQuestion
     //아직 입력하지 않았다는 레이블
     var label: UILabel!
     // 보기 버튼
-    var viewAnswerButton: UIButton!
-    
+    @IBOutlet weak var viewAnswerButton: UIButton!
     
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        answerTextView.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+
+        // Done 버튼을 오른쪽에 배치하기 위해 flexibleSpace를 추가
+        toolbar.items = [flexibleSpace, doneButton]
+
+        answerTextView.inputAccessoryView = toolbar
         
         //UI set
         updateUI()
@@ -80,31 +100,34 @@ class MainViewController: UIViewController, UITextViewDelegate {
     
     // tidView 클릭시
     @objc func tidViewTapped() {
-        UIView.transition(with: tidView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
-            self.tidView.subviews.forEach { subview in
-                subview.isHidden = false
-            }
-            self.viewAnswerButton.isHidden = true
-            self.saveButton.isHidden = false
-            
-            // 입력하지 않았다는 label 제거
-            self.label?.removeFromSuperview()
-        }, completion: { (completed) in
-            if let tapGesture = self.tidView.gestureRecognizers?.first {
-                self.tidView.removeGestureRecognizer(tapGesture)
-            }
-            
-            // tapGesture 추가
-            let newTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tidViewTapped))
-            self.tidView.addGestureRecognizer(newTapGesture)
-            
-
-            
-
-        })
+        // 특정 조건을 만족하는 경우에만 함수 실행
+        if shouldActivateTidViewTapped() {
+            UIView.transition(with: tidView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                self.tidView.subviews.forEach { subview in
+                    subview.isHidden = false
+                }
+                self.viewAnswerButton.isHidden = true
+                self.saveButton.isHidden = false
+                
+                // 입력하지 않았다는 label 제거
+                self.label?.removeFromSuperview()
+            }, completion: { (completed) in
+                self.questionState = .myQuestion
+                if let tapGesture = self.tidView.gestureRecognizers?.first {
+                    self.tidView.removeGestureRecognizer(tapGesture)
+                }
+                
+                let newTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tidViewTapped))
+                self.tidView.addGestureRecognizer(newTapGesture)
+            })
+        }
     }
 
-    
+    // 조건 체크 (tidtapped에 사용)
+    func shouldActivateTidViewTapped() -> Bool {
+        return questionState == .opponentQuestionNotAnswered
+    }
+
     
     func updateUI() {
         
@@ -116,8 +139,11 @@ class MainViewController: UIViewController, UITextViewDelegate {
             // 내가 입력한 질문, 아직 답하지 않음
             answerTextView.isHidden = false
             saveButton.isHidden = false
+            viewAnswerButton.isHidden = true
+            loverAnswerLabel.isHidden = true
+            self.mainTIDLabel.text = "TID"
             
-            // 여기에서 inputAccessoryView를 사용하기 전에 nil 체크를 합니다.
+            // 여기에서 inputAccessoryView를 사용하기 전에 nil 체크 -> 오류 왜 뜨니
             if let inputAccessoryView = answerTextView.inputAccessoryView {
                 inputAccessoryView.isHidden = false
             }
@@ -125,28 +151,27 @@ class MainViewController: UIViewController, UITextViewDelegate {
             // 상대방이 입력한 질문, 아직 답하지 않음
             answerTextView.isHidden = false
             saveButton.isHidden = true
+            loverAnswerLabel.isHidden = true
         case .opponentQuestionAnsweredHidden:
             // 상대방이 입력한 질문, 답이 있음 (답이 숨겨진 상태)
             saveButton.isHidden = true
-            showButtonmaker()
+            viewAnswerButton.isHidden = true
+            loverAnswerLabel.isHidden = true
             
         case .opponentQuestionAnsweredVisible:
             // 상대방이 입력한 질문, 답이 있음 (답이 표시된 상태)
             answerTextView.isHidden = true
             saveButton.isHidden = true
-            // 상대방의 답 표시 로직
+            loverAnswerLabel.isHidden = false
+            self.mainTIDLabel.text = "TLD"
         }
         
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        print("!")
-        // 내가'! 입력한 질문, 아직 답하지 않음 상태에서의 로직
-        if let inputAccessoryView = answerTextView.inputAccessoryView {
-            inputAccessoryView.isHidden = false
-        }
-//        questionState = .opponentQuestionNotAnswered
-          questionState = .opponentQuestionAnsweredHidden
+        // 테스트 위한 상태 변경
+      questionState = .opponentQuestionNotAnswered
+//      questionState = .opponentQuestionAnsweredHidden
         // 상태 업데이트 후 UI 갱신
         switch questionState {
         case .opponentQuestionNotAnswered:
@@ -163,7 +188,7 @@ class MainViewController: UIViewController, UITextViewDelegate {
                 label.textAlignment = .center
                 label.textColor = .black
                 label.font = UIFont.systemFont(ofSize: 16)
-                label.numberOfLines = 0 // 여러 줄 텍스트 지원
+                label.numberOfLines = 0
                 
                 // 레이블의 크기와 위치 tidView의 중앙
                 label.frame = CGRect(x: 0, y: 0, width: tidView.frame.width, height: tidView.frame.height)
@@ -177,21 +202,22 @@ class MainViewController: UIViewController, UITextViewDelegate {
             }) { (completed) in
                 let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tidViewTapped))
                 self.tidView.addGestureRecognizer(tapGesture)
-                self.questionState = .myQuestion
             }
             
         case .opponentQuestionAnsweredHidden:
             // 상대방이 이미 답한 경우
             UIView.transition(with: tidView, duration: 0.5, options: .transitionFlipFromRight, animations: { [self] in
-                showButtonmaker()
+                
+                tidView.subviews.forEach { subview in
+                    subview.isHidden = true
+                }
                 self.saveButton.isHidden = true
-                self.viewAnswerButton?.isHidden = false
+                self.viewAnswerButton.isHidden = false
                 
                 
             }) { (completed) in
                 let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tidViewTapped))
                 self.tidView.addGestureRecognizer(tapGesture)
-                self.questionState = .opponentQuestionAnsweredHidden
             }
             
         default:
@@ -199,49 +225,47 @@ class MainViewController: UIViewController, UITextViewDelegate {
         }
     }
 
-    func showButtonmaker() {
-        // tidView가 nil이 아닌 경우에만 실행
-        guard let tidView = tidView else {
-            return
-        }
-        
-        // tidView의 하위 뷰 없애기
-        tidView.subviews.forEach { subview in
-            subview.isHidden = true
-        }
 
-        // 새로운 UIButton을 생성하여 tidView의 중앙에 추가
-        viewAnswerButton = UIButton()
-        viewAnswerButton.setTitle("보기", for: .normal)
-        viewAnswerButton.setTitleColor(.black, for: .normal)
-        viewAnswerButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        viewAnswerButton.titleLabel?.numberOfLines = 0
-        viewAnswerButton.titleLabel?.textAlignment = .center
-
-        // 텍스트에 맞게 버튼 크기 설정
-        let textSize = viewAnswerButton.titleLabel?.sizeThatFits(CGSize(width: tidView.frame.width, height: tidView.frame.height))
-        let buttonWidth = min(tidView.frame.width, textSize?.width ?? 0)
-        let buttonHeight = min(tidView.frame.height, textSize?.height ?? 0)
-        viewAnswerButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
-
-        // 버튼의 중앙을 tidView의 중앙으로 설정
-        viewAnswerButton.center = CGPoint(x: tidView.frame.width / 2, y: tidView.frame.height / 2)
-
-        // 터치시에 해당 함수
-        viewAnswerButton.addTarget(self, action: #selector(viewAnswerButtonTapped), for: .touchUpInside)
-
-        // tidView에 버튼 추가
-        tidView.addSubview(viewAnswerButton)
-    }
-
-
-    @objc func viewAnswerButtonTapped() {
-        
+    
+    @IBAction func viewAnswerButtonTapped(_ sender: Any) {
         print("!")
-        questionState = .opponentQuestionAnsweredVisible
-        
+            
+            UIView.transition(with: tidView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                self.tidView.subviews.forEach { subview in
+                    subview.isHidden = false
+                }
+                
+                self.questionLabel.isHidden = true
+                self.answerTextView.isHidden = true
+                self.mainTIDLabel.text = "TLD"
+                self.loverAnswerLabel.isHidden = false
+                
+                // 버튼 숨김
+                self.viewAnswerButton.isHidden = true
+                
+            }, completion: nil)
         
         
     }
+    deinit {
+            // 뷰가 해제될 때 Observer 해제
+            NotificationCenter.default.removeObserver(self)
+        }
 
+        // 키보드가 나타날 때 실행되는 함수
+    @objc func keyboardWillShow(_ notification: Notification) {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                // 키보드의 높이를 통해 화면을 조절
+                self.view.frame.origin.y = -(keyboardSize.height)+40
+            }
+        }
+        // 키보드가 사라질 때 실행되는 함수
+        @objc func keyboardWillHide(_ notification: Notification) {
+            self.view.frame.origin.y = 0
+        }
+    @objc func doneButtonTapped() {
+        self.view.endEditing(true)
+    }
+
+    
 }
