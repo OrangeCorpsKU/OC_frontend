@@ -27,6 +27,7 @@
 		19C8A4182AEFEB7700F8AEB4 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C8A4172AEFEB7700F8AEB4 /* UserTableViewCell.swift */; };
 		19C8A41E2AEFEDDC00F8AEB4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C8A41D2AEFEDDC00F8AEB4 /* User.swift */; };
 		19D714282AEEC8530061552F /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D714272AEEC8530061552F /* MypageViewController.swift */; };
+		19DF86C62B0BE1970002C73F /* QuestionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DF86C52B0BE1970002C73F /* QuestionState.swift */; };
 		ABCBC54248522329F39D5882 /* Pods_K_lab_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9918FEF2B786917327BB57C /* Pods_K_lab_project.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		19C8A4172AEFEB7700F8AEB4 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		19C8A41D2AEFEDDC00F8AEB4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		19D714272AEEC8530061552F /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
+		19DF86C52B0BE1970002C73F /* QuestionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionState.swift; sourceTree = "<group>"; };
 		4641246C8670C8168038BA75 /* Pods-K-lab-project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-K-lab-project.debug.xcconfig"; path = "Target Support Files/Pods-K-lab-project/Pods-K-lab-project.debug.xcconfig"; sourceTree = "<group>"; };
 		8F5D6FA94691927F6B27FFBF /* Pods-K-lab-project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-K-lab-project.release.xcconfig"; path = "Target Support Files/Pods-K-lab-project/Pods-K-lab-project.release.xcconfig"; sourceTree = "<group>"; };
 		B9918FEF2B786917327BB57C /* Pods_K_lab_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_K_lab_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 			children = (
 				19C8A41D2AEFEDDC00F8AEB4 /* User.swift */,
 				19026ED72AF13FF200951591 /* News.swift */,
+				19DF86C52B0BE1970002C73F /* QuestionState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				19026EE22AF234EA00951591 /* ChatViewController.swift in Sources */,
 				19B02FF32AED386F00B14EC5 /* K_lab_project.xcdatamodeld in Sources */,
 				19B02FE92AED386F00B14EC5 /* AppDelegate.swift in Sources */,
+				19DF86C62B0BE1970002C73F /* QuestionState.swift in Sources */,
 				0D5651B12AFD37D0008D072C /* ChatUIController.swift in Sources */,
 				19B02FEB2AED386F00B14EC5 /* SceneDelegate.swift in Sources */,
 				19026ED82AF13FF200951591 /* News.swift in Sources */,
