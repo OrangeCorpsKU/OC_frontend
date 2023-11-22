@@ -63,6 +63,7 @@ class MypageViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
         //Birth Picker
         setupBirthPickerToolBar()
         setupBirthPicker()
+<<<<<<< HEAD
         
         let userNameToolBar = UIToolbar()
         userNameToolBar.sizeToFit()
@@ -72,6 +73,8 @@ class MypageViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
 
         userNameToolBar.items = [userNameFlexibleSpace, userNameDoneButton]
         userNameTextField.inputAccessoryView = userNameToolBar
+=======
+>>>>>>> main
 
     }
     func setUI(){
@@ -97,10 +100,14 @@ class MypageViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
         deleteButton.layer.masksToBounds = true;
     }
     
+<<<<<<< HEAD
     @objc func userNameDoneButtonTapped() {
         userNameTextField.resignFirstResponder()
     }
 
+=======
+    
+>>>>>>> main
     // edit 버튼을 눌렀다면
     @IBAction func editButtonTapped(_ sender: UIButton) {
         if editStatus {
@@ -191,7 +198,10 @@ class MypageViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
             
             return formatter.string(from: date)
         }
+<<<<<<< HEAD
     
+=======
+>>>>>>> main
         //DONE toolbar
         private func setupDayPickerToolBar() {
             

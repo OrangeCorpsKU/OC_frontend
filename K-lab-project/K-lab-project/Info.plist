@@ -9,12 +9,20 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+<<<<<<< HEAD
 				<string>com.googleusercontent.apps.431765987734-eve42ihf4gv5245enfpn6iet6lsvkife</string>
+=======
+				<string>com.googleusercontent.apps.qg4fnjosvmpqn6flaupo45iakulrmspu</string>
+>>>>>>> main
 			</array>
 		</dict>
 	</array>
 	<key>GIDClientID</key>
+<<<<<<< HEAD
 	<string>431765987734-eve42ihf4gv5245enfpn6iet6lsvkife.apps.googleusercontent.com</string>
+=======
+	<string>com.googleusercontent.apps.858583544479-gtmpkc0k70n18d6g1ulg7l3bstjn7581</string>
+>>>>>>> main
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

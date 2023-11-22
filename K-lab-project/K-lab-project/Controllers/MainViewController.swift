@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 
+<<<<<<< HEAD
 class MainViewController: UIViewController, UITextViewDelegate {
     
     // Country Label
@@ -38,11 +39,47 @@ class MainViewController: UIViewController, UITextViewDelegate {
     // 보기 버튼
     @IBOutlet weak var viewAnswerButton: UIButton!
     
+=======
+class MainViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+
+    var newsArray: [News] = [
+        News(newsImage:UIImage(systemName: "newspaper"),newsHeadLine: "0000000", newsMainText: "0000000000"),
+        News(newsImage:UIImage(systemName: "newspaper"),newsHeadLine: "0000000", newsMainText: "0000000000")
+    ]
+
+    
+    
+    
+    @IBOutlet weak var mainWeather_tableView: UITableView!
+    @IBOutlet weak var mainNews_tableView: UITableView!
+>>>>>>> main
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+<<<<<<< HEAD
         answerTextView.delegate = self
+=======
+        mainNews_tableView.dataSource = self
+        mainNews_tableView.delegate = self
+        
+        let tapNewsGesture = UITapGestureRecognizer(target: self, action: #selector(didNewsTapView(_:)))
+        
+        let tapWeatherGesture = UITapGestureRecognizer(target: self, action: #selector(didWeatherTapView(_:)))
+
+        mainNews_tableView.addGestureRecognizer(tapNewsGesture)
+        mainWeather_tableView.addGestureRecognizer(tapWeatherGesture)
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return newsArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = mainNews_tableView.dequeueReusableCell(withIdentifier: "MainNewsTableViewCell", for: indexPath) as! MainNewsTableViewCell
+>>>>>>> main
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -61,6 +98,7 @@ class MainViewController: UIViewController, UITextViewDelegate {
         //UI set
         updateUI()
         
+<<<<<<< HEAD
     }
     
     // time set
@@ -268,4 +306,27 @@ class MainViewController: UIViewController, UITextViewDelegate {
     }
 
     
+=======
+        
+        
+        return cell
+    }
+    
+    @objc func didNewsTapView(_ sender: UITapGestureRecognizer) {
+        
+        // 테이블 뷰가 탭되었을 때 실행되는 코드
+        let vcName = self.storyboard?.instantiateViewController(withIdentifier: "NewsViewController")
+        vcName?.modalPresentationStyle = .fullScreen //전체화면으로 보이게 설정
+        vcName?.modalTransitionStyle = .crossDissolve //전환 애니메이션 설정
+        self.present(vcName!, animated: true, completion: nil)
+    }
+    
+
+    @objc private func didWeatherTapView(_ sender: UITapGestureRecognizer) {
+        let hostingController = WeatherViewHostingController(rootView: WeatherViewController())
+        hostingController.modalPresentationStyle = .fullScreen
+        present(hostingController, animated: true)
+    }
+
+>>>>>>> main
 }
