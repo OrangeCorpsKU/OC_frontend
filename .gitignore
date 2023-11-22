@@ -9,6 +9,7 @@ xcuserdata/
 *.xcscmblueprint
 *.xccheckout
 *.xcuserstate
+*.DS_Store
 
 ### Xcode Patch ###
 *.xcodeproj/*
