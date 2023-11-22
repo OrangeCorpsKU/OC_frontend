@@ -170,8 +170,8 @@ class MainViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         // 테스트 위한 상태 변경
-      questionState = .opponentQuestionNotAnswered
-//      questionState = .opponentQuestionAnsweredHidden
+//      questionState = .opponentQuestionNotAnswered
+      questionState = .opponentQuestionAnsweredHidden
         // 상태 업데이트 후 UI 갱신
         switch questionState {
         case .opponentQuestionNotAnswered:
