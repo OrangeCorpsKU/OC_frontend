@@ -88,21 +88,31 @@ struct CustomNavigationBar: ViewModifier {
                 }
             }
             .padding(.horizontal)
-            .frame(height: 55) // Adjust the height of the navigation bar
-            .background(Color(red: 255/255, green: 193/255, blue: 7/255)) // Set your desired navigation bar background color
-
+            .padding(.top, 50) //화면에서 잘 보이게 하기 위해서 top에다가 padding 줬습니다..
+            .frame(height: 105) // 네비바 높이 조절했습니다..
+            .background(Color(red: 255/255, green: 193/255, blue: 7/255)) //배경색깔 조절했습니다.. (RGB 값으로)
+            
         }
+    }
+}
+
+class ChatViewModel: ObservableObject {
+    //위의 4개 미리 쳐져 있는 dummy data들입니다.
+    @Published var messages: [String] = ["Hello", "Hi there!", "How are you?", "I'm good, thanks!"]
+    @Published var newMessage: String = ""
+
+    func sendMessage() {
+        messages.append(newMessage)
+        newMessage = ""
     }
 }
 
 
 
 struct ChatViewController: View {
-    //위의 4개 미리 쳐져 있는 dummy data들입니다.
-    @State private var messages: [String] = ["Hello", "Hi there!", "How are you?", "I'm good, thanks!"]
+    @StateObject var viewModel = ChatViewModel()
     
     //새로 쓰여질 메시지들 저장할 String 변수입니다.
-    @State private var newMessage: String = ""
     @State var name: String = "GichuL"
 
     var body: some View {
@@ -117,13 +127,13 @@ struct ChatViewController: View {
             ScrollView {
                 VStack(spacing: 12) {
                     //각 채팅 내용에 id 값을 부여합니다 (id 값은 그 자체 (\.self))
-                    ForEach(0..<messages.count, id: \.self) { index in
+                    ForEach(0..<viewModel.messages.count, id: \.self) { index in
                         
                         if index % 2 == 0 {
                             //자신이 말하는 것(노란색 말풍선) 관련
                             HStack {
                                 Spacer()
-                                Text(messages[index])
+                                Text(viewModel.messages[index])
                                     .padding(10)
                                     .background(
                                             SpeechBubble()
@@ -137,7 +147,7 @@ struct ChatViewController: View {
                                 Image("profile")
                                     .frame(width: 30, height: 30)
                                     .padding(.top, 40)
-                                Text(messages[index])
+                                Text(viewModel.messages[index])
                                     .padding(10)
                                     .background(
                                             InvertedSpeechBubble()
@@ -165,15 +175,14 @@ struct ChatViewController: View {
                     //기본적인 RoundedRectangle 위에다가 입력창과 버튼을 overlay 했습니다
                     .overlay(
                         HStack {
-                            TextField("Type your message :)", text: $newMessage)
+                            TextField("Type your message :)", text: $viewModel.newMessage)
                                 .padding(.leading, 15)
                             
                             Spacer()
                             
                             //채팅 보내기 버튼입니다 (동그라미 버튼)
                             Button(action: {
-                                messages.append(newMessage)
-                                newMessage = ""
+                                viewModel.sendMessage()
                             }) {
                                 Image("ArrowRightCircle")
                                     .padding(.horizontal, 10)
@@ -183,10 +192,15 @@ struct ChatViewController: View {
                     )
             }
             .padding()
-            .padding(.bottom, 20)
+            .padding(.bottom, 85)
         }
         .navigationBarHidden(true) //네비 바를 숨깁니다
         .navigationBarTitleDisplayMode(.inline) //title을 가운데로 정렬하기 위한 코드입니다.
+        .ignoresSafeArea() //레이아웃을 조정하기 위해 SafeArea를 무시함!
     }
 }
 
+
+#Preview {
+    ChatViewController()
+}

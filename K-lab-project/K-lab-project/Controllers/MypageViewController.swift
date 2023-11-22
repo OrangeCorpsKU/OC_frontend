@@ -45,6 +45,8 @@ class MypageViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         setUI()
         
         textFields = [userNameTextField,countryTextField,dayTextField,birthTextField]
@@ -61,6 +63,18 @@ class MypageViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
         //Birth Picker
         setupBirthPickerToolBar()
         setupBirthPicker()
+<<<<<<< HEAD
+        
+        let userNameToolBar = UIToolbar()
+        userNameToolBar.sizeToFit()
+
+        let userNameFlexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let userNameDoneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(userNameDoneButtonTapped))
+
+        userNameToolBar.items = [userNameFlexibleSpace, userNameDoneButton]
+        userNameTextField.inputAccessoryView = userNameToolBar
+=======
+>>>>>>> main
 
     }
     func setUI(){
@@ -86,7 +100,14 @@ class MypageViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
         deleteButton.layer.masksToBounds = true;
     }
     
+<<<<<<< HEAD
+    @objc func userNameDoneButtonTapped() {
+        userNameTextField.resignFirstResponder()
+    }
+
+=======
     
+>>>>>>> main
     // edit 버튼을 눌렀다면
     @IBAction func editButtonTapped(_ sender: UIButton) {
         if editStatus {
@@ -177,6 +198,10 @@ class MypageViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDa
             
             return formatter.string(from: date)
         }
+<<<<<<< HEAD
+    
+=======
+>>>>>>> main
         //DONE toolbar
         private func setupDayPickerToolBar() {
             
