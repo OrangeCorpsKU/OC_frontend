@@ -1349,6 +1349,9 @@
 				zh_TW,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			packageReferences = (
+				0D4658662B0D37340026ECC3 /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = FBB2F7F7F21CE7228B4E07EE334B3D15 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2318,6 +2321,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0D4658662B0D37340026ECC3 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }
