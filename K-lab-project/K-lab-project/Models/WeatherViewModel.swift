@@ -73,8 +73,6 @@ func processWeatherList(_ weatherList: [WeatherInfo]) -> [WeatherInfo] {
     
     for(_, dailyWeatherList) in groupedByDate {
         
-        print(dailyWeatherList.count)
-        
         //그 날의 최고 기온, 최저 기온을 찾아낸다
         var maxTemp = Double.leastNormalMagnitude //가능한 가장 작은 value로 initialize
         var minTemp = Double.greatestFiniteMagnitude //가능한 가장 큰 value로 initialize
@@ -102,7 +100,7 @@ func processWeatherList(_ weatherList: [WeatherInfo]) -> [WeatherInfo] {
         
         //Weather 객체 새로 하나 만들어서 processedWeatherInfo에다가 넣어줄 것이다
         let processedWeather = Weather(main: "\(weatherAt9AM)+\(weatherAt9PM)", icon: "")
-        print(processedWeather.main)
+        //print(processedWeather.main)
         
         //위에 가공된 정보들을 바탕으로 새로운 WeatherInfo Object를 만든다
         var processedWeatherInfo = WeatherInfo(dt: dailyWeatherList.first?.dt ?? 0, main: Main(temp: 0, humidity: 0), weatherAt9AM: weatherAt9AM, weatherAt9PM: weatherAt9PM, formattedDate: "", formattedTime: "", minTemp: Int(minTemp), maxTemp: Int(maxTemp), weather: [processedWeather])
@@ -193,7 +191,7 @@ class WeatherViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 //list의 첫번째 요소에서 날짜 정보를 구해서 firstDate에 저장한다.
                 firstTimeStamp = weatherForecast.list[0].dt
                 firstDate = convertTimeStampToDate(timestamp: TimeInterval(firstTimeStamp))
-                print(firstDate)
+                //print(firstDate)
                 
                 //filter 함수를 이용해서, 처음 날짜와 다른 것들만 list에 넣어준다 (32개만 넣어준다)
                 // Ensure that result.count < 32 is checked before starting the reduction

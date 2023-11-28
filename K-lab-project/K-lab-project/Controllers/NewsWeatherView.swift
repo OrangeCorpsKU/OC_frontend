@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WebKit
 
 //대각선을 그리기 위한 함수입니다
 struct DiagonalLine: Shape {
@@ -130,6 +131,7 @@ struct WeatherView: View {
                                                     .foregroundColor(.yellow)
                                             } else {
                                                 Image(weather.weather.first!.main) //날씨 정보 아이콘입니다
+                                                    .frame(width: 60, height: 60)
                                                     .foregroundColor(.yellow)
                                             }
                                             
@@ -280,21 +282,28 @@ struct NewsView: View {
     
     //News 정보를 불러오고 관리하는 newsViewModel 생성
     @StateObject private var newsViewModel = NewsViewModel()
+    @State private var selectedURL: URL?
+    @State private var isWebViewPresented = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            ForEach(newsViewModel.newsItems) { newsItem in
+            ForEach(newsViewModel.newsItems.prefix(5), id: \.self) { newsItem in
                 NewsCell(newsItem: newsItem)
                     .onTapGesture {
-                        // Perform actions when a news cell is tapped
-                        print("News item tapped with ID: \(newsItem.id)")
-                        // Additional actions can be performed based on the news item
+                        //News Cell을 tap하면 URL을 세팅한다
+                        selectedURL = URL(string: newsItem.url)
+                        isWebViewPresented = true
                     }
-                }
             }
-            .onAppear {
-                //View가 보일 때 News 정보 가져온다!
-                newsViewModel.fetchNews()
+        }
+        .onAppear {
+            //View가 보일 때 News 정보 가져온다!
+            //매개 변수로는 user_id를 넘겨줄 거에욥!
+            newsViewModel.fetchNews(user_id: "orangecorps3@gmail.com")
+        }
+        .sheet(isPresented: $isWebViewPresented) {
+            //선택된 URL을 잉요해서 WebView를 보여준다
+            WebView(url: selectedURL)
         }
     }
 }
@@ -304,23 +313,73 @@ struct NewsCell: View {
     let newsItem: NewsItem
 
     var body: some View {
-        HStack(spacing: 8) {
-            // Assuming the titleImage is a URL, you can use a suitable image loading library
+        HStack(spacing: 10) {
+            //이미지 처리 (URL로 불러올지, 그림 자체를 불러올지는 추후 결정 해야겠지?)
             Image(systemName: "newspaper")
                 .resizable()
                 .cornerRadius(8)
                 .frame(width: 112, height: 112)
 
             VStack(spacing: 8) {
-                Text(newsItem.title)
-                    .font(Font.system(size: 16).bold())
-                    .multilineTextAlignment(.leading)
-
-                Text(newsItem.newsSummary)
-                    .font(Font.system(size: 10))
+                
+                //newsItem.title이 비어있지 않다면
+                if !newsItem.headLine.isEmpty {
+                    Text(newsItem.headLine)
+                        .font(Font.system(size: 16).bold())
+                        .lineLimit(2) //제목은 최대 1줄만 출력되도록 한다
+                } else { //newsItem.title이 비어있다면
+                    Text("No information available")
+                        .font(Font.system(size: 16).bold())
+                        .foregroundColor(.gray)
+                        .lineLimit(2)
+                }
+                
+                //newsItem.summary가 비어있지 않다면
+                if !newsItem.summary.isEmpty {
+                    Text(newsItem.summary)
+                        .font(Font.system(size: 12))
+                        .lineLimit(5) //요약본은 최대 4줄만 출력되도록 한다.
+                } else { //newsItem.title이 비어있다면
+                    Text("No information available in this sumamry. It could be the error of the NYTimes API or error in the server side. We are not at fault. K-Lab project, Fighting :)")
+                        .font(Font.system(size: 12))
+                        .foregroundColor(.gray)
+                        .lineLimit(5) //요약본은 최대 4줄만 출력되도록 한다.
+                }
             }
         }
-        .frame(width: 360, height: 116)
+        .frame(width: 360, height: 132)
+    }
+}
+
+//NewsCell을 눌렀을 때, URL을 이용해서 전체 뉴스 페이지를 띄우기 위한 WebView
+struct WebView: UIViewRepresentable {
+    let url: URL?
+
+    func makeUIView(context: Context) -> WKWebView {
+        let webView = WKWebView()
+        webView.navigationDelegate = context.coordinator
+        return webView
+    }
+
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        if let url = url {
+            let request = URLRequest(url: url)
+            uiView.load(request)
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, WKNavigationDelegate {
+        var parent: WebView
+
+        init(_ parent: WebView) {
+            self.parent = parent
+        }
+
+        // Handle navigation events if needed
     }
 }
 

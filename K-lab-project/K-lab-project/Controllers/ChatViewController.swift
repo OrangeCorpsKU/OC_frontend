@@ -59,33 +59,20 @@ struct InvertedSpeechBubble: Shape {
 //제가 만든 NavigationBar를 위한 구조체입니다.
 struct CustomNavigationBar: ViewModifier {
     var title: String
-    var backBtnAction: () -> Void
-    var TIDAction: () -> Void
 
     func body(content: Content) -> some View {
         VStack(spacing: 0) {
             HStack {
-                //back Button을 눌렀을 때, 뒤로 가게 만들 겁니다
-                Button(action: backBtnAction) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.black)
-                        .frame(width: 24, height:24)
-                }
 
                 Spacer()
-
+                
+                //네비 바에는 상대방의 ID 값만이 들어갈 것임
                 Text(title)
                     .foregroundColor(.black)
                     .font(.title2)
 
                 Spacer()
                 
-                //TID Button을 눌렀을 때 TIDAction 메서드를 부를 겁니다
-                Button(action: TIDAction) {
-                    Image("eventIcon")
-                        .foregroundColor(.black)
-                        .frame(width: 24, height:24)
-                }
             }
             .padding(.horizontal)
             .padding(.top, 50) //화면에서 잘 보이게 하기 위해서 top에다가 padding 줬습니다..
@@ -100,10 +87,21 @@ class ChatViewModel: ObservableObject {
     //위의 4개 미리 쳐져 있는 dummy data들입니다.
     @Published var messages: [String] = ["Hello", "Hi there!", "How are you?", "I'm good, thanks!"]
     @Published var newMessage: String = ""
-
+    
+//    func sendMessage() {
+//        messages.append(newMessage)
+//        newMessage = ""
+//    }
+    
+    //SocketManager를 이용해서 메시지 send/receive를 수행할 예정이다 (각 함수를 이용해서)
     func sendMessage() {
-        messages.append(newMessage)
-        newMessage = ""
+        SocketManager.shared.sendMessage(newMessage)
+    }
+    
+    func receiveMessage() {
+        if let message = SocketManager.shared.receiveMessage() {
+            messages.append(message)
+        }
     }
 }
 
@@ -113,14 +111,14 @@ struct ChatViewController: View {
     @StateObject var viewModel = ChatViewModel()
     
     //새로 쓰여질 메시지들 저장할 String 변수입니다.
-    @State var name: String = "GichuL"
+    @State var user_name: String = "GichuL"
 
     var body: some View {
         //여백을 해결하기 위해 spacing을 0으로 설정했습니다.
         VStack(spacing: 0) {
             //제가 Custom한 Naviagtion Bar을 사용하기 위해 modifier를 불렀습니다.
             Text("Your Content Here")
-                .modifier(CustomNavigationBar(title: name, backBtnAction: {}, TIDAction: {}))
+                .modifier(CustomNavigationBar(title: user_name))
             
             //채팅방에서 사용하게 될 ScrollView입니다.
             //VStack으로 구성했고, 채팅창에 치는 것 족족 자동으로 누적될 것입니다.
@@ -193,6 +191,16 @@ struct ChatViewController: View {
             }
             .padding()
             .padding(.bottom, 85)
+        }
+        .onAppear { //View가 나타날 때 server에 연결을 시도한다 (connectToServer() 메소드로)
+            SocketManager.shared.connectToServer()
+        }
+        //메시지를 periodically하게 받아들인다 (interval 조절이 필요할 수도 있다)
+        //Main Thread에서 UI 업데이트를 보다 안전하게 처리할 수 있도록 코드를 구성
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            DispatchQueue.main.async { //async를 통해 동시에 다른 작업을 할 수 있음
+                viewModel.receiveMessage()
+            }
         }
         .navigationBarHidden(true) //네비 바를 숨깁니다
         .navigationBarTitleDisplayMode(.inline) //title을 가운데로 정렬하기 위한 코드입니다.

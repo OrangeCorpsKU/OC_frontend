@@ -14,6 +14,7 @@
 		0D6BB7332B049E6300C1896A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6BB7322B049E6300C1896A /* TabBarViewController.swift */; };
 		0DAF03DB2B0DC81A00E18FC5 /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF03DA2B0DC81A00E18FC5 /* NewsViewModel.swift */; };
 		0DBD59082B0BDA0B002934C4 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBD59072B0BDA0B002934C4 /* WeatherViewModel.swift */; };
+		0DDCD1DB2B14D18100BECFFD /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDCD1DA2B14D18100BECFFD /* SocketManager.swift */; };
 		19026ED82AF13FF200951591 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026ED72AF13FF200951591 /* News.swift */; };
 		19026EE22AF234EA00951591 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026EE12AF234EA00951591 /* ChatViewController.swift */; };
 		19B02FE92AED386F00B14EC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B02FE82AED386F00B14EC5 /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 		0D6BB7322B049E6300C1896A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0DAF03DA2B0DC81A00E18FC5 /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		0DBD59072B0BDA0B002934C4 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		0DDCD1DA2B14D18100BECFFD /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		19026ED72AF13FF200951591 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		19026EE12AF234EA00951591 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		19B02FE52AED386F00B14EC5 /* K-lab-project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "K-lab-project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 				19026ED72AF13FF200951591 /* News.swift */,
 				0DBD59072B0BDA0B002934C4 /* WeatherViewModel.swift */,
 				0DAF03DA2B0DC81A00E18FC5 /* NewsViewModel.swift */,
+				0DDCD1DA2B14D18100BECFFD /* SocketManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				19B02FF32AED386F00B14EC5 /* K_lab_project.xcdatamodeld in Sources */,
 				19B02FE92AED386F00B14EC5 /* AppDelegate.swift in Sources */,
 				0D5651B12AFD37D0008D072C /* ChatUIController.swift in Sources */,
+				0DDCD1DB2B14D18100BECFFD /* SocketManager.swift in Sources */,
 				19B02FEB2AED386F00B14EC5 /* SceneDelegate.swift in Sources */,
 				0DBD59082B0BDA0B002934C4 /* WeatherViewModel.swift in Sources */,
 				19026ED82AF13FF200951591 /* News.swift in Sources */,
@@ -381,6 +385,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -435,6 +440,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
