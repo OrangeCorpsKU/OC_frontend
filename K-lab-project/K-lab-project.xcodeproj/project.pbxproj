@@ -15,7 +15,6 @@
 		0DAF03DB2B0DC81A00E18FC5 /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAF03DA2B0DC81A00E18FC5 /* NewsViewModel.swift */; };
 		0DBD59082B0BDA0B002934C4 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBD59072B0BDA0B002934C4 /* WeatherViewModel.swift */; };
 		0DDCD1DB2B14D18100BECFFD /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDCD1DA2B14D18100BECFFD /* SocketManager.swift */; };
-		19026ED82AF13FF200951591 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026ED72AF13FF200951591 /* News.swift */; };
 		19026EE22AF234EA00951591 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19026EE12AF234EA00951591 /* ChatViewController.swift */; };
 		19B02FE92AED386F00B14EC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B02FE82AED386F00B14EC5 /* AppDelegate.swift */; };
 		19B02FEB2AED386F00B14EC5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B02FEA2AED386F00B14EC5 /* SceneDelegate.swift */; };
@@ -42,7 +41,6 @@
 		0DAF03DA2B0DC81A00E18FC5 /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		0DBD59072B0BDA0B002934C4 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		0DDCD1DA2B14D18100BECFFD /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
-		19026ED72AF13FF200951591 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		19026EE12AF234EA00951591 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		19B02FE52AED386F00B14EC5 /* K-lab-project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "K-lab-project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B02FE82AED386F00B14EC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				19C8A41D2AEFEDDC00F8AEB4 /* User.swift */,
-				19026ED72AF13FF200951591 /* News.swift */,
 				0DBD59072B0BDA0B002934C4 /* WeatherViewModel.swift */,
 				0DAF03DA2B0DC81A00E18FC5 /* NewsViewModel.swift */,
 				0DDCD1DA2B14D18100BECFFD /* SocketManager.swift */,
@@ -299,7 +296,6 @@
 				0DDCD1DB2B14D18100BECFFD /* SocketManager.swift in Sources */,
 				19B02FEB2AED386F00B14EC5 /* SceneDelegate.swift in Sources */,
 				0DBD59082B0BDA0B002934C4 /* WeatherViewModel.swift in Sources */,
-				19026ED82AF13FF200951591 /* News.swift in Sources */,
 				0D3824342B0A391500989B60 /* HostingController_forNewsWeather.swift in Sources */,
 				19C8A41E2AEFEDDC00F8AEB4 /* User.swift in Sources */,
 			);

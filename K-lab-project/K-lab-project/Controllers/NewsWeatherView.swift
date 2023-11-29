@@ -127,11 +127,13 @@ struct WeatherView: View {
                                             if weather.weather.first!.main == "Clear"
                                             {
                                                 Image("Clear_light")
-                                                    .frame(width: 60, height: 60)
+                                                    .resizable()
+                                                    .frame(width: 52, height: 52)
                                                     .foregroundColor(.yellow)
                                             } else {
                                                 Image(weather.weather.first!.main) //날씨 정보 아이콘입니다
-                                                    .frame(width: 60, height: 60)
+                                                    .resizable()
+                                                    .frame(width: 52, height: 52)
                                                     .foregroundColor(.yellow)
                                             }
                                             
@@ -210,7 +212,7 @@ struct WeatherView: View {
                                                             .resizable()
                                                             .frame(width: 20, height: 20)
                                                             .foregroundColor(.black)
-                                                            .padding(.leading, 20)
+                                                            .padding(.trailing, 20)
                                                     } else {
                                                         Image(weatherForecast_aboutFourDays.list[index].weatherAt9AM ?? "failed")
                                                             .resizable()
@@ -278,33 +280,87 @@ struct WeatherView: View {
 }
 
 //NewsView도 그냥 struct로 따로 뺄게
+@available(iOS 15.0, *)
 struct NewsView: View {
     
     //News 정보를 불러오고 관리하는 newsViewModel 생성
     @StateObject private var newsViewModel = NewsViewModel()
     @State private var selectedURL: URL?
     @State private var isWebViewPresented = false
+    @State var coupleUserID = "ssilver0104@gmail.com"
+    
+    @State private var scrollViewProxy: GeometryProxy?
+    
+    //초반에 뉴스 정보를 한 번은 불러와야 하니깐, init()에서 그 과정 수행
+    init() {
+        //view가 만들어질 때 news를 가져온다
+        newsViewModel.fetchNews(user_id: coupleUserID, page: newsViewModel.currentPage)
+    }
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            ForEach(newsViewModel.newsItems.prefix(5), id: \.self) { newsItem in
-                NewsCell(newsItem: newsItem)
-                    .onTapGesture {
-                        //News Cell을 tap하면 URL을 세팅한다
-                        selectedURL = URL(string: newsItem.url)
-                        isWebViewPresented = true
+        if newsViewModel.newsItems.isEmpty { //뉴스 정보가 비어있다면 예외처리
+            VStack(spacing: 16)
+            {
+                Spacer()
+                Image("no_available")
+                    .resizable()
+                    .frame(width: 64, height: 64)
+                Text("No News Available")
+                    .font(Font.system(size: 20).bold())
+                Spacer()
+            }
+        } else { //불러온 뉴스 정보가 있을 때만 ScrollView를 생성해서 뉴스를 보여줌
+            ScrollView(showsIndicators: false) {
+                
+                VStack(spacing: 16) {
+                    ForEach(newsViewModel.newsItems, id: \.self) { newsItem in
+                        NewsCell(newsItem: newsItem)
+                            .onTapGesture {
+                                //News Cell을 tap하면 URL을 세팅한다
+                                selectedURL = URL(string: newsItem.url)
+                                isWebViewPresented = true
+                            }
                     }
+                }
+            }
+            
+            .overlay {
+                //UISCrollView Proxy를 capture하기 위해 GeometryReader를 생성한다
+                GeometryReader { proxy in
+                    Color.clear
+                        .onAppear {
+                            scrollViewProxy = proxy
+                        }
+                }
+            }
+            .onAppear {
+                //무한 스크롤(?)을 가능하게 하기 위한 코드
+                let threshold: CGFloat = 100
+                
+                if let proxy = scrollViewProxy {
+                    let offset = scrollViewOffset(fromBottom: threshold, proxy: proxy)
+                    if offset < threshold {
+                        // When the threshold is reached, fetch more articles
+                        newsViewModel.currentPage += 1
+                        newsViewModel.fetchNews(user_id: coupleUserID, page: newsViewModel.currentPage)
+                    }
+                }
+                //View가 보일 때 News 정보 가져온다!
+                //매개 변수로는 user_id를 넘겨줄 거에욥!
+            }
+            .sheet(isPresented: $isWebViewPresented) {
+                //선택된 URL을 이용해서 WebView를 보여준다
+                WebView(url: selectedURL)
             }
         }
-        .onAppear {
-            //View가 보일 때 News 정보 가져온다!
-            //매개 변수로는 user_id를 넘겨줄 거에욥!
-            newsViewModel.fetchNews(user_id: "orangecorps3@gmail.com")
-        }
-        .sheet(isPresented: $isWebViewPresented) {
-            //선택된 URL을 잉요해서 WebView를 보여준다
-            WebView(url: selectedURL)
-        }
+    }
+    
+    //ScrollView에 관한 Offset 함수(private한 함수)
+    private func scrollViewOffset(fromBottom threshold: CGFloat, proxy: GeometryProxy) -> CGFloat {
+        let contentHeight = proxy.size.height
+        let offsetY = proxy.frame(in: .global).maxY
+        let scrollViewHeight = proxy.size.height
+        return contentHeight - offsetY - scrollViewHeight + threshold
     }
 }
 
@@ -397,7 +453,11 @@ struct NewsWeatherView: View {
             
             //NewsView에 관한 곳이야!
             if selectedSegment == "News" {
-                NewsView()
+                if #available(iOS 15.0, *) {
+                    NewsView()
+                } else {
+                    // Fallback on earlier versions
+                }
             //WeatherView에 관한 곳이야!
             } else {
                 WeatherView()
