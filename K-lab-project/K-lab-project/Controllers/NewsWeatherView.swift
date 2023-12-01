@@ -294,7 +294,7 @@ struct NewsView: View {
     //초반에 뉴스 정보를 한 번은 불러와야 하니깐, init()에서 그 과정 수행
     init() {
         //view가 만들어질 때 news를 가져온다
-        newsViewModel.fetchNews(user_id: coupleUserID, page: newsViewModel.currentPage)
+        newsViewModel.fetchNews(user_id: coupleUserID, index: newsViewModel.currentNewsIndex)
     }
     
     var body: some View {
@@ -341,8 +341,8 @@ struct NewsView: View {
                     let offset = scrollViewOffset(fromBottom: threshold, proxy: proxy)
                     if offset < threshold {
                         // When the threshold is reached, fetch more articles
-                        newsViewModel.currentPage += 1
-                        newsViewModel.fetchNews(user_id: coupleUserID, page: newsViewModel.currentPage)
+                        newsViewModel.currentNewsIndex += 1
+                        newsViewModel.fetchNews(user_id: coupleUserID, index: newsViewModel.currentNewsIndex)
                     }
                 }
                 //View가 보일 때 News 정보 가져온다!

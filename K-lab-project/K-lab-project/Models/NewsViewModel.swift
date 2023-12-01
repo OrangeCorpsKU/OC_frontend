@@ -31,18 +31,19 @@ class NewsViewModel: NSObject, ObservableObject, URLSessionDelegate {
     @Published var message: String = ""
     
     //Pagination 개념을 위한 변수들입니당!
-    var currentPage: Int = 1
+    var currentNewsIndex: Int = 0
     var isLoading: Bool = false
         
     //뉴스 정보 불러오는 함수 (아무것도 불러오는 게 없으면 걍 return)
-    func fetchNews(user_id: String, page: Int) {
+    func fetchNews(user_id: String, index: Int) {
         guard !isLoading else {
             return //한 작업이 이미 progress에 있다면 더 이상 새로운 request를 만들지 않음 (한번에 한 progress씩 수행하도록 함)
         }
         
         isLoading = true //isLoading을 true로 변환
         
-        guard let url = URL(string: "http://3.38.49.6:8080/news?userId=\(user_id)") else {
+        //Api를 통해서 userid와 index 값을 넘겨줄 것임
+        guard let url = URL(string: "http://3.38.49.6:8080/news?userId=\(user_id)&index\(index)") else {
             print("URL 불러오기 실패")
             isLoading = false //isLoading 변수를 false로 변경한다
             return
@@ -57,6 +58,7 @@ class NewsViewModel: NSObject, ObservableObject, URLSessionDelegate {
             defer {
                 DispatchQueue.main.async {
                     self.isLoading = false
+                    self.currentNewsIndex = index + 1
                 }
             }
             
@@ -74,7 +76,7 @@ class NewsViewModel: NSObject, ObservableObject, URLSessionDelegate {
                 
                 // Update the newsItems property on the main thread
                 DispatchQueue.main.async {
-                    if page == 1 {
+                    if index == 1 {
                         //만약 지금이 first page라면, 지금 existing하는 items들을 replace한다
                         self.newsItems = decodedNewsItems
                     } else {
