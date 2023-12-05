@@ -113,19 +113,23 @@ struct ChatViewController: View {
             ChatInputView(viewModel: viewModel)
         }
         .onAppear {
-            DispatchQueue.main.async {
+            DispatchQueue.global(qos: .background).async {
                 viewModel.connectToServer() //Server에 먼저 연결한다
                 viewModel.createChatRoom { //채팅방을 create한다
                     if let roomID = viewModel.chatRoom?.roomId { //roomID를 정상적으로 서버로부터 받아왔다면, roomID를 저장하여, StompTopic으로 구독한다.
-                        viewModel.subscribeToStompTopic(roomID: roomID)
+                        viewModel.subscribeToRoom(roomID: roomID, senderID: user_name)
                     }
                 }
             }
+//            DispatchQueue.main.async {
+////                viewModel.connectToServer() //Server에 먼저 연결한다
+//                
+//            }
         }
         //lastSentMessage를 이용하여 UI 업데이트
         .onChange(of: viewModel.lastSentMessage) { newMessage in
             // Handle changes in lastSentMessage, update UI if needed
-            if let newMessage = newMessage {
+            if let newMessage = newMessage, !newMessage.isEmpty {
                 // Assuming you have a method to add the new message to your messages array
                 viewModel.addMessage(newMessage)
             }

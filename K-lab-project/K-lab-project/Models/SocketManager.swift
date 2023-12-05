@@ -95,12 +95,17 @@ class SocketManager: NSObject, WebSocketDelegate {
     //Socket을 Configure하기 위함
     private func configureSocket() {
         let urlString = Constants.serverURL
-        socket = WebSocket(request: URLRequest(url: URL(string: urlString)!))
+        guard let url = URL(string: urlString) else {
+            print("Invalid WebSocket URL")
+            return
+        }
+        socket = WebSocket(request: URLRequest(url: url))
         socket?.delegate = self
     }
     
     //server에 연결하기 위한 함수
     func connectToServer() {
+        print("Connecting to server....")
         socket?.connect()
     }
     
@@ -112,9 +117,9 @@ class SocketManager: NSObject, WebSocketDelegate {
     //채팅방을 만들어주는 function
     func createChatRoom(withName name: String, completion: @escaping (Result<ChatRoom, Error>) -> Void) {
         // Create a POST request to create a chat room
-        let urlString = Constants.serverURL
-        socket = WebSocket(request: URLRequest(url: URL(string: urlString)!))
-        socket?.delegate = self
+//        let urlString = Constants.serverURL
+//        socket = WebSocket(request: URLRequest(url: URL(string: urlString)!))
+//        socket?.delegate = self
         
         //url을 이요해서 서버에 요청을 보낸다
         //POST 요청으로 보내야 한다
@@ -150,9 +155,10 @@ class SocketManager: NSObject, WebSocketDelegate {
         }.resume()
     }
     
-    func subscribeToStompTopic(roomID: String) {
+    func subscribeToRoom(roomID: String, senderID: String) {
         let stompSubscribeFrame = StompFrame(command: .subscribe, headers: ["destination": "/topic/\(roomID)"])
-        sendMessage(message: stompSubscribeFrame.toString(), senderID: "ssilver0104@gmail.com", roomID: roomID)
+        print(stompSubscribeFrame)
+        sendMessage(message: stompSubscribeFrame.toString(), senderID: senderID, roomID: roomID)
     }
     
     func handleStompMessage(_ message: String) {
@@ -162,6 +168,14 @@ class SocketManager: NSObject, WebSocketDelegate {
     
     // Modify sendMessage function in SocketManager
     func sendMessage(message: String, senderID: String, roomID: String) {
+        
+        // Check if the message is empty before sending (빈 메시지인지 체크)
+        guard !message.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            // Do nothing if the message is empty
+            print("Empty message. Not sending.")
+            return
+        }
+        
         let chatMessage = [
             "type": "CHAT",
             "sender": senderID,
@@ -171,6 +185,7 @@ class SocketManager: NSObject, WebSocketDelegate {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: chatMessage)
             socket?.write(data: jsonData)
+            print(chatMessage)
             print("jsonData write 성공")
         } catch {
             print("Error serializing chat message: \(error.localizedDescription)")

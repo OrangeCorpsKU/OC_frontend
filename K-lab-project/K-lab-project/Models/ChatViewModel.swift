@@ -40,9 +40,10 @@ class ChatViewModel: ObservableObject {
             }
         }
     }
-
-    func subscribeToStompTopic(roomID: String) {
-        socketManager.subscribeToStompTopic(roomID: roomID)
+    
+    //
+    func subscribeToRoom(roomID: String, senderID: String) {
+        socketManager.subscribeToRoom(roomID: roomID, senderID: senderID)
     }
 
     func sendMessage() {
