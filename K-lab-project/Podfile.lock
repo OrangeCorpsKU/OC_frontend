@@ -15,11 +15,13 @@ PODS:
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 4.0, >= 1.5)
   - GTMSessionFetcher/Core (3.1.1)
+  - Starscream (4.0.6)
   - SwiftSocket (2.0.2)
 
 DEPENDENCIES:
   - GoogleSignIn
   - GoogleSignInSwiftSupport
+  - Starscream
   - SwiftSocket
 
 SPEC REPOS:
@@ -29,6 +31,7 @@ SPEC REPOS:
     - GoogleSignInSwiftSupport
     - GTMAppAuth
     - GTMSessionFetcher
+    - Starscream
     - SwiftSocket
 
 SPEC CHECKSUMS:
@@ -37,8 +40,9 @@ SPEC CHECKSUMS:
   GoogleSignInSwiftSupport: 6ca6e5a978faa4cd43451b6b9b38b96ab5db1734
   GTMAppAuth: 99fb010047ba3973b7026e45393f51f27ab965ae
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
+  Starscream: fb2c4510bebf908c62bd383bcf05e673720e91fd
   SwiftSocket: 6f4c9c63fbc5c1d61188936bb3c599fd546f40ae
 
-PODFILE CHECKSUM: 7f7150ad8edad8e5b7bddd83aa4abe874a2697a6
+PODFILE CHECKSUM: 04cdca6f46151e40d4f08ba633d5a3a9230d0ceb
 
 COCOAPODS: 1.14.3

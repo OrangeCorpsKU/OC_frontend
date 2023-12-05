@@ -83,35 +83,11 @@ struct CustomNavigationBar: ViewModifier {
     }
 }
 
-class ChatViewModel: ObservableObject {
-    //위의 4개 미리 쳐져 있는 dummy data들입니다.
-    @Published var messages: [String] = ["Hello", "Hi there!", "How are you?", "I'm good, thanks!"]
-    @Published var newMessage: String = ""
-    
-//    func sendMessage() {
-//        messages.append(newMessage)
-//        newMessage = ""
-//    }
-    
-    //SocketManager를 이용해서 메시지 send/receive를 수행할 예정이다 (각 함수를 이용해서)
-    func sendMessage() {
-        SocketManager.shared.sendMessage(newMessage)
-    }
-    
-    func receiveMessage() {
-        if let message = SocketManager.shared.receiveMessage() {
-            messages.append(message)
-        }
-    }
-}
-
-
-
 struct ChatViewController: View {
     @StateObject var viewModel = ChatViewModel()
     
     //새로 쓰여질 메시지들 저장할 String 변수입니다.
-    @State var user_name: String = "GichuL"
+    @State var user_name: String = "ssilver0104@gmail.com"
 
     var body: some View {
         //여백을 해결하기 위해 spacing을 0으로 설정했습니다.
@@ -125,36 +101,8 @@ struct ChatViewController: View {
             ScrollView {
                 VStack(spacing: 12) {
                     //각 채팅 내용에 id 값을 부여합니다 (id 값은 그 자체 (\.self))
-                    ForEach(0..<viewModel.messages.count, id: \.self) { index in
-                        
-                        if index % 2 == 0 {
-                            //자신이 말하는 것(노란색 말풍선) 관련
-                            HStack {
-                                Spacer()
-                                Text(viewModel.messages[index])
-                                    .padding(10)
-                                    .background(
-                                            SpeechBubble()
-                                                .fill(Color.yellow)
-                                        )
-                                    .foregroundColor(.white)
-                            }
-                        } else {
-                            //상대방이 말하는 것(회색 말풍선) 관련
-                            HStack {
-                                Image("profile")
-                                    .frame(width: 30, height: 30)
-                                    .padding(.top, 40)
-                                Text(viewModel.messages[index])
-                                    .padding(10)
-                                    .background(
-                                            InvertedSpeechBubble()
-                                                .fill(Color.gray)
-                                        )
-                                    .foregroundColor(.white)
-                                Spacer()
-                            }
-                        }
+                    ForEach(viewModel.messages, id: \.self) { message in
+                        ChatBubble(message: message, isUser: message.isSentByUser())
                     }
                 }
                 .padding()
@@ -162,52 +110,100 @@ struct ChatViewController: View {
             }
             
             //채팅을 입력하는 창입니다.
-            HStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(height: 50)
-                    .foregroundColor(.white)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.yellow, lineWidth: 2)
-                    )
-                    //기본적인 RoundedRectangle 위에다가 입력창과 버튼을 overlay 했습니다
-                    .overlay(
-                        HStack {
-                            TextField("Type your message :)", text: $viewModel.newMessage)
-                                .padding(.leading, 15)
-                            
-                            Spacer()
-                            
-                            //채팅 보내기 버튼입니다 (동그라미 버튼)
-                            Button(action: {
-                                viewModel.sendMessage()
-                            }) {
-                                Image("ArrowRightCircle")
-                                    .padding(.horizontal, 10)
-                                    .foregroundColor(.black)
-                            }
-                        }
-                    )
-            }
-            .padding()
-            .padding(.bottom, 85)
+            ChatInputView(viewModel: viewModel)
         }
-        .onAppear { //View가 나타날 때 server에 연결을 시도한다 (connectToServer() 메소드로)
-            SocketManager.shared.connectToServer()
-        }
-        //메시지를 periodically하게 받아들인다 (interval 조절이 필요할 수도 있다)
-        //Main Thread에서 UI 업데이트를 보다 안전하게 처리할 수 있도록 코드를 구성
-        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            DispatchQueue.main.async { //async를 통해 동시에 다른 작업을 할 수 있음
-                viewModel.receiveMessage()
+        .onAppear {
+            DispatchQueue.main.async {
+                viewModel.connectToServer() //Server에 먼저 연결한다
+                viewModel.createChatRoom { //채팅방을 create한다
+                    if let roomID = viewModel.chatRoom?.roomId { //roomID를 정상적으로 서버로부터 받아왔다면, roomID를 저장하여, StompTopic으로 구독한다.
+                        viewModel.subscribeToStompTopic(roomID: roomID)
+                    }
+                }
             }
         }
-        .navigationBarHidden(true) //네비 바를 숨깁니다
-        .navigationBarTitleDisplayMode(.inline) //title을 가운데로 정렬하기 위한 코드입니다.
-        .ignoresSafeArea() //레이아웃을 조정하기 위해 SafeArea를 무시함!
+        //lastSentMessage를 이용하여 UI 업데이트
+        .onChange(of: viewModel.lastSentMessage) { newMessage in
+            // Handle changes in lastSentMessage, update UI if needed
+            if let newMessage = newMessage {
+                // Assuming you have a method to add the new message to your messages array
+                viewModel.addMessage(newMessage)
+            }
+        }
+        .navigationBarHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
+        .ignoresSafeArea()
+        
     }
 }
 
+struct ChatInputView: View {
+    @ObservedObject var viewModel: ChatViewModel
+
+    var body: some View {
+        HStack {
+            RoundedRectangle(cornerRadius: 10)
+                .frame(height: 50)
+                .foregroundColor(.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.yellow, lineWidth: 2)
+                )
+                .overlay(
+                    HStack {
+                        TextField("Type your message :)", text: $viewModel.newMessage)
+                            .padding(.leading, 15)
+
+                        Spacer()
+
+                        Button(action: {
+                            viewModel.sendMessage() //전송 버튼을 누르면 메시지를 보낸다
+                            viewModel.newMessage = "" //TextField를 비우는 역할을 한다
+                        }) {
+                            Image("ArrowRightCircle")
+                                .padding(.horizontal, 10)
+                                .foregroundColor(.black)
+                        }
+                    }
+                )
+        }
+        .padding()
+        .padding(.bottom, 85)
+    }
+}
+
+struct ChatBubble: View {
+    let message: String
+    let isUser: Bool
+
+    var body: some View {
+        HStack {
+            if isUser { //내가 입력한 경우라면
+                Spacer()
+                Text(message)
+                    .padding(10)
+                    .background(SpeechBubble().fill(Color.yellow))
+                    .foregroundColor(.white)
+            } else { //내가 입력한 경우가 아니라면
+                Image("profile")
+                    .frame(width: 30, height: 30)
+                    .padding(.top, 40)
+                Text(message)
+                    .padding(10)
+                    .background(InvertedSpeechBubble().fill(Color.gray))
+                    .foregroundColor(.white)
+                Spacer()
+            }
+        }
+    }
+}
+
+extension String {
+    func isSentByUser() -> Bool {
+        // Implement your logic to determine if the message is sent by the user
+        return true // Replace with your logic
+    }
+}
 
 #Preview {
     ChatViewController()

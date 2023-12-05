@@ -160,7 +160,7 @@ struct WeatherView: View {
                             .padding(.leading)
                     }
                     .onAppear { //현재 위도, 경도 기준은 한국 기준
-                        weatherViewManageModel.fetchWeatherInfo_current(latitude: 37,  longitude: 127, apiKey: "1bab82c0dcc474332fcbc0b87089af2c")
+                        weatherViewManageModel.fetchWeatherInfo_current(latitude: 37.715,  longitude: 127.12, apiKey: "1bab82c0dcc474332fcbc0b87089af2c")
                     }
                     .frame(maxWidth: .infinity)
                     .background(Color(red: 240/255, green: 240/255, blue: 240/255))
@@ -268,7 +268,7 @@ struct WeatherView: View {
                             
                         }
                         .onAppear { //현재 위도, 경도 기준은 한국 기준
-                            weatherViewManageModel.fetchWeatherInfo_afterFourDays(latitude: 37,  longitude: 127, apiKey: "1bab82c0dcc474332fcbc0b87089af2c")
+                            weatherViewManageModel.fetchWeatherInfo_afterFourDays(latitude: 37.715,  longitude: 127.12, apiKey: "1bab82c0dcc474332fcbc0b87089af2c")
                         }
                         .padding(.vertical, 5)
                     }
@@ -291,67 +291,69 @@ struct NewsView: View {
     
     @State private var scrollViewProxy: GeometryProxy?
     
-    //초반에 뉴스 정보를 한 번은 불러와야 하니깐, init()에서 그 과정 수행
-    init() {
-        //view가 만들어질 때 news를 가져온다
-        newsViewModel.fetchNews(user_id: coupleUserID, index: newsViewModel.currentNewsIndex)
-    }
-    
     var body: some View {
-        if newsViewModel.newsItems.isEmpty { //뉴스 정보가 비어있다면 예외처리
-            VStack(spacing: 16)
-            {
-                Spacer()
-                Image("no_available")
-                    .resizable()
-                    .frame(width: 64, height: 64)
-                Text("No News Available")
-                    .font(Font.system(size: 20).bold())
-                Spacer()
-            }
-        } else { //불러온 뉴스 정보가 있을 때만 ScrollView를 생성해서 뉴스를 보여줌
-            ScrollView(showsIndicators: false) {
+        
+        VStack {
+            if newsViewModel.newsItems.isEmpty { //뉴스 정보가 비어있다면 예외처리
+                VStack(spacing: 16)
+                {
+                    Spacer()
+                    Image("no_available")
+                        .resizable()
+                        .frame(width: 64, height: 64)
+                    Text("No News Available")
+                        .font(Font.system(size: 20).bold())
+                    Spacer()
+                }
+            } else { //불러온 뉴스 정보가 있을 때만 ScrollView를 생성해서 뉴스를 보여줌
+                ScrollView(showsIndicators: false) {
+                    
+                    VStack(spacing: 16) {
+                        ForEach(newsViewModel.newsItems, id: \.self) { newsItem in
+                            NewsCell(newsItem: newsItem)
+                                .onTapGesture {
+                                    //News Cell을 tap하면 URL을 세팅한다
+                                    selectedURL = URL(string: newsItem.url)
+                                    isWebViewPresented = true
+                                }
+                        }
+                    }
+                }
                 
-                VStack(spacing: 16) {
-                    ForEach(newsViewModel.newsItems, id: \.self) { newsItem in
-                        NewsCell(newsItem: newsItem)
-                            .onTapGesture {
-                                //News Cell을 tap하면 URL을 세팅한다
-                                selectedURL = URL(string: newsItem.url)
-                                isWebViewPresented = true
+                .overlay {
+                    //UISCrollView Proxy를 capture하기 위해 GeometryReader를 생성한다
+                    GeometryReader { proxy in
+                        Color.clear
+                            .onAppear {
+                                scrollViewProxy = proxy
                             }
                     }
                 }
-            }
-            
-            .overlay {
-                //UISCrollView Proxy를 capture하기 위해 GeometryReader를 생성한다
-                GeometryReader { proxy in
-                    Color.clear
-                        .onAppear {
-                            scrollViewProxy = proxy
+                .onAppear {
+                    //무한 스크롤(?)을 가능하게 하기 위한 코드
+                    let threshold: CGFloat = 100
+                    
+                    if let proxy = scrollViewProxy {
+                        let offset = scrollViewOffset(fromBottom: threshold, proxy: proxy)
+                        if offset < threshold {
+                            // When the threshold is reached, fetch more articles
+                            newsViewModel.currentNewsIndex += 1
+                            newsViewModel.fetchNews(user_id: coupleUserID, index: newsViewModel.currentNewsIndex)
                         }
-                }
-            }
-            .onAppear {
-                //무한 스크롤(?)을 가능하게 하기 위한 코드
-                let threshold: CGFloat = 100
-                
-                if let proxy = scrollViewProxy {
-                    let offset = scrollViewOffset(fromBottom: threshold, proxy: proxy)
-                    if offset < threshold {
-                        // When the threshold is reached, fetch more articles
-                        newsViewModel.currentNewsIndex += 1
-                        newsViewModel.fetchNews(user_id: coupleUserID, index: newsViewModel.currentNewsIndex)
                     }
+                    //View가 보일 때 News 정보 가져온다!
+                    //매개 변수로는 user_id를 넘겨줄 거에욥!
                 }
-                //View가 보일 때 News 정보 가져온다!
-                //매개 변수로는 user_id를 넘겨줄 거에욥!
+                .sheet(isPresented: $isWebViewPresented) {
+                    //선택된 URL을 이용해서 WebView를 보여준다
+                    WebView(url: selectedURL)
+                }
             }
-            .sheet(isPresented: $isWebViewPresented) {
-                //선택된 URL을 이용해서 WebView를 보여준다
-                WebView(url: selectedURL)
-            }
+        }
+        .onAppear {
+            // Fetch news when the view appears on screen
+            newsViewModel.fetchNews(user_id: coupleUserID, index: newsViewModel.currentNewsIndex)
+            print(newsViewModel.newsItems)
         }
     }
     
@@ -365,16 +367,44 @@ struct NewsView: View {
 }
 
 //NewsCell 역할을 하는 코드가 길어져서 따로 뺐습니다!
+//iOS 15.0 이상만!
+@available(iOS 15.0, *)
 struct NewsCell: View {
     let newsItem: NewsItem
 
     var body: some View {
         HStack(spacing: 10) {
             //이미지 처리 (URL로 불러올지, 그림 자체를 불러올지는 추후 결정 해야겠지?)
-            Image(systemName: "newspaper")
-                .resizable()
-                .cornerRadius(8)
-                .frame(width: 112, height: 112)
+            AsyncImage(url: URL(string: newsItem.imgUrl ?? "")) { phase in
+                switch phase {
+                case .empty:
+                    if newsItem.imgUrl == nil //imgUrl이 비어있다면
+                    {
+                        Image(systemName: "newspaper")
+                            .resizable()
+                            .frame(width: 112, height: 112)
+                    } else { //url은 있는데 로딩 중이라면
+                        ProgressView() // Placeholder while loading
+                    }
+                case .success(let image):
+                    image
+                        .resizable()
+                        .frame(width: 112, height: 112)
+                        .aspectRatio(contentMode: .fit)
+                case .failure:
+                    Image(systemName: "photo") // Placeholder for failure
+                        .resizable()
+                        .frame(width: 112, height: 112)
+                        .aspectRatio(contentMode: .fit)
+                @unknown default:
+                    fatalError()
+                }
+            }
+            
+//            Image(systemName: "newspaper")
+//                .resizable()
+//                .cornerRadius(8)
+//                .frame(width: 112, height: 112)
 
             VStack(spacing: 8) {
                 

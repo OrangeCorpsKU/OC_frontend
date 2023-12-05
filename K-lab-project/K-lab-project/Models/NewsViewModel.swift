@@ -20,6 +20,7 @@ struct NewsItem: Codable, Hashable {
     let summary: String
     let publishedDate: String
     let country: String
+    let imgUrl: String? //null로 들어올 수도 있어서 그에 대한 예외처리
 }
 
 //NewsView에 관한 NewsViewModel
@@ -43,7 +44,7 @@ class NewsViewModel: NSObject, ObservableObject, URLSessionDelegate {
         isLoading = true //isLoading을 true로 변환
         
         //Api를 통해서 userid와 index 값을 넘겨줄 것임
-        guard let url = URL(string: "http://3.38.49.6:8080/news?userId=\(user_id)&index\(index)") else {
+        guard let url = URL(string: "http://3.38.49.6:8080/news?userId=\(user_id)&index=\(index)") else {
             print("URL 불러오기 실패")
             isLoading = false //isLoading 변수를 false로 변경한다
             return
@@ -70,20 +71,25 @@ class NewsViewModel: NSObject, ObservableObject, URLSessionDelegate {
             //오류 있으면 오류 잡아내기
             //JSONDecoder()로 json을 decoding 할 것입니다
             do {
-                print(String(data: data, encoding: .utf8) ?? "Data is not valid UTF-8")
+//                print(String(data: data, encoding: .utf8) ?? "Data is not valid UTF-8")
                 let jsonDecoder = JSONDecoder()
                 let decodedNewsItems = try jsonDecoder.decode([NewsItem].self, from: data)
+                print(decodedNewsItems)
                 
                 // Update the newsItems property on the main thread
                 DispatchQueue.main.async {
-                    if index == 1 {
+                    if index == 0 {
                         //만약 지금이 first page라면, 지금 existing하는 items들을 replace한다
                         self.newsItems = decodedNewsItems
                     } else {
                         //만약 지금이 first page가 아니라면, 새로운 item들을 append 한다
-                        self.newsItems.append(contentsOf: decodedNewsItems)
+                        // Append new items only if they don't exist in the current list
+                        for newItem in decodedNewsItems {
+                            if !self.newsItems.contains(newItem) {
+                                self.newsItems.append(newItem)
+                            }
+                        }
                     }
-                    self.newsItems = decodedNewsItems
                 }
             } catch {
                 print("An error occurred while decoding JSON: \(error)")

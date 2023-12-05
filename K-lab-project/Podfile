@@ -9,5 +9,6 @@ target 'K-lab-project' do
 pod 'GoogleSignIn'
 pod 'GoogleSignInSwiftSupport'
 pod 'SwiftSocket'
+pod 'Starscream'
 
 end
